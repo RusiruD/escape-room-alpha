@@ -48,6 +48,8 @@ public class App extends Application {
     SceneManagerAi.addUi(AppUi.ESCAPE_ROOM, loadFxml("room"));
     SceneManagerAi.addUi(AppUi.FIRST_RIDDLE, loadFxml("firstRiddle"));
 
+    SceneManagerAi.addUi(AppUi.FOLDER, loadFxml("secondRiddle"));
+
     scene = new Scene(SceneManagerAi.getUiRoot(AppUi.ESCAPE_ROOM), 600, 470);
     // scene.getStylesheets().add("/css/style.css");
     // String css = this.getClass().getResource("/css/style.css").toExternalForm();

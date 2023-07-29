@@ -146,7 +146,15 @@ public class RoomController {
   }
 
   @FXML
-  public void benchClicked(ActionEvent event) throws IOException {}
+  public void benchClicked(ActionEvent event) throws IOException {
+    Button button = (Button) event.getSource();
+    Scene sceneButtonIsIn = button.getScene();
+    sceneButtonIsIn.setRoot(SceneManagerAi.getUiRoot(AppUi.FOLDER));
+    // System.out.println("bench clicked");
+    // x++;
+    //      System.out.println("dsss");
+    // }
+  }
 
   @FXML
   public void GoToSafe(ActionEvent event) throws IOException {}
