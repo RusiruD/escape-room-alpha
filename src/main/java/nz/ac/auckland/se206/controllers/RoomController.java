@@ -132,7 +132,11 @@ public class RoomController {
   int x = 0;
 
   @FXML
-  public void coatHangerClicked(ActionEvent event) {}
+  public void coatHangerClicked(ActionEvent event) {
+
+    x++;
+    System.out.println("coat hanger clicked");
+  }
 
   @FXML
   public void clickWindow(MouseEvent event) {
@@ -157,5 +161,16 @@ public class RoomController {
   }
 
   @FXML
-  public void GoToSafe(ActionEvent event) throws IOException {}
+  public void GoToSafe(ActionEvent event) throws IOException {
+    if (!GameState.isSafeOpen) {
+      Button button = (Button) event.getSource();
+      Scene sceneButtonIsIn = button.getScene();
+      sceneButtonIsIn.setRoot(SceneManagerAi.getUiRoot(AppUi.SAFE));
+    } else {
+      btnGoToSafe.setDisable(true);
+      btnGoToSafe.setVisible(false);
+      key.setVisible(true);
+      key.setDisable(false);
+    }
+  }
 }
