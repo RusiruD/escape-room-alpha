@@ -59,5 +59,9 @@ public class App extends Application {
     // Parent root = loadFxml("room");
 
     // root.requestFocus();
+
+    // Parent root = loadFxml("room");
+
+    // root.requestFocus();
   }
 }
