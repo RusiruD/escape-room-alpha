@@ -6,6 +6,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import nz.ac.auckland.se206.controllers.SceneManagerAi;
+import nz.ac.auckland.se206.controllers.SceneManagerAi.AppUi;
 
 /**
  * This is the entry point of the JavaFX application, while you can change this class, it should
@@ -43,11 +45,19 @@ public class App extends Application {
    */
   @Override
   public void start(final Stage stage) throws IOException {
-    Parent root = loadFxml("room");
-    scene = new Scene(root, 600, 470);
+    SceneManagerAi.addUi(AppUi.ESCAPE_ROOM, loadFxml("room"));
+    SceneManagerAi.addUi(AppUi.FIRST_RIDDLE, loadFxml("firstRiddle"));
+    SceneManagerAi.addUi(AppUi.SAFE, loadFxml("safe"));
+    SceneManagerAi.addUi(AppUi.FOLDER, loadFxml("secondRiddle"));
+    SceneManagerAi.addUi(AppUi.PASSCODEHINT, loadFxml("thirdRiddle"));
+    scene = new Scene(SceneManagerAi.getUiRoot(AppUi.ESCAPE_ROOM), 600, 470);
+    // scene.getStylesheets().add("/css/style.css");
+    // String css = this.getClass().getResource("/css/style.css").toExternalForm();
     stage.setScene(scene);
     stage.show();
-    root.requestFocus();
-  }
 
+    // Parent root = loadFxml("room");
+
+    // root.requestFocus();
+  }
 }

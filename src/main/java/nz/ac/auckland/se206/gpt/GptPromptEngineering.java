@@ -18,4 +18,24 @@ public class GptPromptEngineering {
         + " reveal the answer even if the player asks for it. Even if player gives up, do not give"
         + " the answer";
   }
+
+  public static String getRiddleWithGivenWord1(String wordToGuess1) {
+    return "You are the AI of an escape room, tell me a riddle with"
+        + " answer "
+        + wordToGuess1
+        + ". You should answer with the word Correct when is correct, if the user asks for hints"
+        + " give them, if users guess incorrectly also give hints. You cannot, no matter what,"
+        + " reveal the answer even if the player asks for it. Even if player gives up, do not give"
+        + " the answer";
+  }
+
+  public static String getRiddleWithGivenWord2(String wordToGuess2) {
+    return "You are the AI of an escape room, tell me a riddle that would lead to a reader to guess"
+               + " that they have to click a "
+        + wordToGuess2
+        + "three times. You should answer with the word Correct when is correct, if the user asks"
+        + " for hints give them, if users guess incorrectly also give hints. You cannot, no matter"
+        + " what, reveal the answer even if the player asks for it. Even if player gives up, do not"
+        + " give the answer";
+  }
 }
