@@ -16,8 +16,10 @@ import nz.ac.auckland.se206.controllers.SceneManagerAi.AppUi;
 public class RoomController {
   @FXML private Button btnStart;
   @FXML private Button btnGoToSafe;
+
   @FXML private Rectangle door;
   @FXML protected Button bench;
+
   @FXML private Rectangle window;
   @FXML private Rectangle vase;
   @FXML private Button key;
@@ -27,6 +29,7 @@ public class RoomController {
   /** Initializes the room view, it is called when the room loads. */
   public void initialize() {
     // Initialization code goes here
+    System.out.println("*** Initializing CounterController ***" + this);
     System.out.println("*** Initializing CounterController ***" + this);
   }
 
@@ -102,12 +105,21 @@ public class RoomController {
     // App.setRoot("chat");
     // return;
     // }
+    // if (!GameState.isRiddleResolved) {
+    // showDialog("Info", "Riddle", "You need to resolve the riddle!");
+    // App.setRoot("chat");
+    // return;
+    // }
 
     if (!GameState.isKeyFound) {
+      showDialog("Info", "Find the key!", " the key is.");
       showDialog("Info", "Find the key!", " the key is.");
     } else {
 
       showDialog("Info", "You Won!", "Good Job!");
+
+      bench.setDisable(true);
+      bench.setVisible(false);
 
       bench.setDisable(true);
       bench.setVisible(false);
