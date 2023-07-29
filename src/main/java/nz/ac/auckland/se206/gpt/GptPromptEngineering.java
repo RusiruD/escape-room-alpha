@@ -31,11 +31,11 @@ public class GptPromptEngineering {
 
   public static String getRiddleWithGivenWord2(String wordToGuess2) {
     return "You are the AI of an escape room, tell me a riddle that would lead to a reader to guess"
-               + " that they have to click a "
+        + " that they have to click a "
         + wordToGuess2
-        + "three times. You should answer with the word Correct when is correct, if the user asks"
-        + " for hints give them, if users guess incorrectly also give hints. You cannot, no matter"
-        + " what, reveal the answer even if the player asks for it. Even if player gives up, do not"
-        + " give the answer";
+        + "three times. You should ensure that the hint to click the object three times is obvious,"
+        + " if the user asks for hints give them, if users guess incorrectly also give hints. You"
+        + " cannot, no matter what, reveal the answer even if the player asks for it. Even if"
+        + " player gives up, do not give the answer";
   }
 }
