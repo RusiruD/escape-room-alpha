@@ -1,6 +1,7 @@
 package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
@@ -32,10 +33,26 @@ public class FirstRiddleController {
    */
   @FXML
   public void initialize() throws ApiProxyException {
-    System.out.println("*** Initializing First Riddle***" + this);
-    chatCompletionRequest =
-        new ChatCompletionRequest().setN(1).setTemperature(0.2).setTopP(0.5).setMaxTokens(100);
-    runGpt(new ChatMessage("user", GptPromptEngineering.getRiddleWithGivenWord("bench press")));
+    Task<Void> searchTask1 =
+        new Task<Void>() {
+
+          @Override
+          protected Void call() throws Exception {
+            chatCompletionRequest =
+                new ChatCompletionRequest()
+                    .setN(1)
+                    .setTemperature(0.2)
+                    .setTopP(0.5)
+                    .setMaxTokens(100);
+            runGpt(
+                new ChatMessage(
+                    "user", GptPromptEngineering.getRiddleWithGivenWord("bench press")));
+            return null;
+          }
+          ;
+        };
+    Thread searchThread1 = new Thread(searchTask1, "Search Thread");
+    searchThread1.start();
   }
 
   /**
@@ -55,6 +72,7 @@ public class FirstRiddleController {
    * @throws ApiProxyException if there is an error communicating with the API proxy
    */
   private ChatMessage runGpt(ChatMessage msg) throws ApiProxyException {
+
     chatCompletionRequest.addMessage(msg);
     try {
       ChatCompletionResult chatCompletionResult = chatCompletionRequest.execute();
@@ -85,10 +103,22 @@ public class FirstRiddleController {
     inputText.clear();
     ChatMessage msg = new ChatMessage("user", message);
     appendChatMessage(msg);
-    ChatMessage lastMsg = runGpt(msg);
-    if (lastMsg.getRole().equals("assistant") && lastMsg.getContent().startsWith("Correct")) {
-      GameState.isRiddle1Resolved = true;
-    }
+    Task<Void> searchTask =
+        new Task<Void>() {
+
+          @Override
+          protected Void call() throws Exception {
+
+            ChatMessage lastMsg = runGpt(msg);
+            if (lastMsg.getRole().equals("assistant")
+                && lastMsg.getContent().startsWith("Correct")) {
+              GameState.isRiddle1Resolved = true;
+            }
+            return null;
+          }
+        };
+    Thread searchThread = new Thread(searchTask, "Search Thread");
+    searchThread.start();
   }
 
   /**

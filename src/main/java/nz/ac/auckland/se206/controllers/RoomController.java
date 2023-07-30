@@ -17,20 +17,19 @@ public class RoomController {
   @FXML private Button btnStart;
   @FXML private Button btnGoToSafe;
 
-  @FXML private Rectangle door;
+  @FXML private Rectangle ball;
   @FXML protected Button bench;
 
   @FXML private Rectangle window;
   @FXML private Rectangle vase;
   @FXML private Button key;
 
-  @FXML private Button coatHanger;
+  @FXML private Button clock;
 
   /** Initializes the room view, it is called when the room loads. */
   public void initialize() {
     // Initialization code goes here
-    System.out.println("*** Initializing CounterController ***" + this);
-    System.out.println("*** Initializing CounterController ***" + this);
+
   }
 
   /**
@@ -84,17 +83,17 @@ public class RoomController {
    */
   @FXML
   public void Start(ActionEvent event) throws IOException {
-    bench.setDisable(false);
 
     btnGoToSafe.setDisable(false);
-
+    clock.setDisable(false);
+    clock.setVisible(true);
     btnStart.setDisable(true);
     btnStart.setVisible(false);
-    door.setDisable(false);
+    ball.setDisable(false);
     bench.setDisable(false);
     // bench.setVisible(true);
 
-    coatHanger.setDisable(false);
+    clock.setDisable(false);
 
     Button button = (Button) event.getSource();
     Scene sceneButtonIsIn = button.getScene();
@@ -148,10 +147,10 @@ public class RoomController {
   int x = 0;
 
   @FXML
-  public void coatHangerClicked(ActionEvent event) {
+  public void clockClicked(ActionEvent event) {
 
     x++;
-    System.out.println("coat hanger clicked");
+    System.out.println("clock clicked");
     if (x == 3) {
       // showDialog("Info", "You Lost!", "You broke the window!");
       // System.exit(0);
@@ -164,7 +163,7 @@ public class RoomController {
 
   @FXML
   public void clickWindow(MouseEvent event) {
-    System.out.println("window clicked");
+
     x++;
     if (x == 3) {
       // showDialog("Info", "You Lost!", "You broke the window!");

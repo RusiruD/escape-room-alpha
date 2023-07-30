@@ -25,13 +25,20 @@
             <Font name="Arial" size="35.0" />
          </font>
       </Label>
-      <Rectangle fx:id="vase" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="41.0" layoutX="340.0" layoutY="193.0" onMouseClicked="#clickVase" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="38.0" />
-      <Rectangle fx:id="window" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="60.0" layoutX="404.0" layoutY="154.0" onMouseClicked="#clickWindow" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="65.0" />
-      <Rectangle fx:id="door" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="98.0" layoutX="137.0" layoutY="205.0" onMouseClicked="#clickDoor" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="65.0" />
+      <Rectangle fx:id="vase" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="41.0" layoutX="424.0" layoutY="372.0" onMouseClicked="#clickVase" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="38.0" />
+      <Rectangle fx:id="window" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="132.0" layoutX="443.0" layoutY="103.0" onMouseClicked="#clickWindow" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="94.0" />
+      <Rectangle fx:id="ball" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="67.0" layoutX="179.0" layoutY="353.0" onMouseClicked="#clickDoor" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="58.0" />
       <Button fx:id="btnStart" layoutX="268.0" layoutY="253.0" mnemonicParsing="false" onAction="#Start" text="Start Game" />
-      <Button fx:id="bench" disable="true" layoutX="59.0" layoutY="130.0" mnemonicParsing="false" onAction="#benchClicked" opacity="0.0" prefHeight="83.0" prefWidth="221.0" text="bench" />
-      <Button fx:id="coatHanger" layoutX="226.0" layoutY="138.0" mnemonicParsing="false" onAction="#coatHangerClicked" opacity="0.0" prefHeight="67.0" prefWidth="85.0" text="Hanger" />
-      <Button fx:id="key" disable="true" layoutX="79.0" layoutY="385.0" mnemonicParsing="false" onAction="#PickUpKey" prefHeight="41.0" prefWidth="65.0" text="key" />
-      <Button fx:id="btnGoToSafe" disable="true" layoutX="69.0" layoutY="386.0" mnemonicParsing="false" onAction="#GoToSafe" prefHeight="41.0" prefWidth="75.0" text="safe" />
+      <Button fx:id="bench" disable="true" layoutX="88.0" layoutY="140.0" mnemonicParsing="false" onAction="#benchClicked" opacity="0.0" prefHeight="75.0" prefWidth="159.0" text="bench" />
+      <Button fx:id="clock" layoutX="63.0" layoutY="89.0" mnemonicParsing="false" onAction="#clockClicked" opacity="0.0" prefHeight="52.0" prefWidth="58.0" text="Clock" />
+      <Button fx:id="btnGoToSafe" disable="true" layoutX="59.0" layoutY="376.0" mnemonicParsing="false" onAction="#GoToSafe" opacity="0.0" prefHeight="48.0" prefWidth="94.0" text="safe" />
+      <Button fx:id="key" layoutX="71.0" layoutY="380.0" mnemonicParsing="false" onAction="#PickUpKey" prefHeight="41.0" prefWidth="65.0" visible="false">
+         <graphic>
+            <ImageView fitHeight="44.0" fitWidth="61.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/download.png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
    </children>
 </Pane>
