@@ -24,7 +24,7 @@ public class RoomController {
   @FXML private Rectangle vase;
   @FXML private Button key;
 
-  @FXML private Button wind;
+  @FXML private Button coatHanger;
 
   /** Initializes the room view, it is called when the room loads. */
   public void initialize() {
@@ -85,12 +85,17 @@ public class RoomController {
   @FXML
   public void Start(ActionEvent event) throws IOException {
     bench.setDisable(false);
-    bench.setVisible(true);
+
     btnGoToSafe.setDisable(false);
     btnGoToSafe.setVisible(true);
+
     btnStart.setDisable(true);
     btnStart.setVisible(false);
     door.setDisable(false);
+    bench.setDisable(false);
+    // bench.setVisible(true);
+
+    coatHanger.setDisable(false);
 
     Button button = (Button) event.getSource();
     Scene sceneButtonIsIn = button.getScene();
