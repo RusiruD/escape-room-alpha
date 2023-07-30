@@ -87,7 +87,6 @@ public class RoomController {
     bench.setDisable(false);
 
     btnGoToSafe.setDisable(false);
-    btnGoToSafe.setVisible(true);
 
     btnStart.setDisable(true);
     btnStart.setVisible(false);

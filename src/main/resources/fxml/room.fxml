@@ -15,6 +15,11 @@
             <Image url="@../images/gym.jpg" />
          </image>
       </ImageView>
+      <ImageView blendMode="DARKEN" fitHeight="60.0" fitWidth="94.0" layoutX="59.0" layoutY="376.0">
+         <image>
+            <Image url="@../images/safe.jpg" />
+         </image>
+      </ImageView>
       <Label layoutX="30.0" layoutY="24.0" prefHeight="41.0" prefWidth="549.0" text="SOFTENG 206 - ESCAPE ROOM">
          <font>
             <Font name="Arial" size="35.0" />
@@ -26,7 +31,7 @@
       <Button fx:id="btnStart" layoutX="268.0" layoutY="253.0" mnemonicParsing="false" onAction="#Start" text="Start Game" />
       <Button fx:id="bench" disable="true" layoutX="59.0" layoutY="130.0" mnemonicParsing="false" onAction="#benchClicked" opacity="0.0" prefHeight="83.0" prefWidth="221.0" text="bench" />
       <Button fx:id="coatHanger" layoutX="226.0" layoutY="138.0" mnemonicParsing="false" onAction="#coatHangerClicked" opacity="0.0" prefHeight="67.0" prefWidth="85.0" text="Hanger" />
-      <Button fx:id="key" disable="true" layoutX="419.0" layoutY="388.0" mnemonicParsing="false" onAction="#PickUpKey" text="key" />
-      <Button fx:id="btnGoToSafe" disable="true" layoutX="418.0" layoutY="388.0" mnemonicParsing="false" onAction="#GoToSafe" text="safe" />
+      <Button fx:id="key" disable="true" layoutX="79.0" layoutY="385.0" mnemonicParsing="false" onAction="#PickUpKey" prefHeight="41.0" prefWidth="65.0" text="key" />
+      <Button fx:id="btnGoToSafe" disable="true" layoutX="69.0" layoutY="386.0" mnemonicParsing="false" onAction="#GoToSafe" prefHeight="41.0" prefWidth="75.0" text="safe" />
    </children>
 </Pane>
