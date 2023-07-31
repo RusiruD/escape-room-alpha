@@ -135,8 +135,8 @@ public class RoomController {
    * @param event the mouse event
    */
   @FXML
-  public void clickVase(MouseEvent event) {
-    System.out.println("vase clicked");
+  public void clickWeight(MouseEvent event) {
+    System.out.println("weight clicked");
   }
 
   /**
@@ -162,7 +162,7 @@ public class RoomController {
   }
 
   @FXML
-  public void clickWindow(MouseEvent event) {
+  public void clickPoster(MouseEvent event) {
 
     x++;
     if (x == 3) {

@@ -33,26 +33,14 @@ public class FirstRiddleController {
    */
   @FXML
   public void initialize() throws ApiProxyException {
-    Task<Void> searchTask1 =
-        new Task<Void>() {
 
-          @Override
-          protected Void call() throws Exception {
-            chatCompletionRequest =
-                new ChatCompletionRequest()
-                    .setN(1)
-                    .setTemperature(0.2)
-                    .setTopP(0.5)
-                    .setMaxTokens(100);
-            runGpt(
-                new ChatMessage(
-                    "user", GptPromptEngineering.getRiddleWithGivenWord("bench press")));
-            return null;
-          }
-          ;
-        };
-    Thread searchThread1 = new Thread(searchTask1, "Search Thread");
-    searchThread1.start();
+    chatCompletionRequest =
+        new ChatCompletionRequest().setN(1).setTemperature(0.2).setTopP(0.5).setMaxTokens(100);
+    Task<ChatMessage> x =
+        runGpt(new ChatMessage("user", GptPromptEngineering.getRiddleWithGivenWord("bench press")));
+
+    Thread searchThread = new Thread(x, "Search Thread");
+    searchThread.start();
   }
 
   /**
@@ -71,20 +59,30 @@ public class FirstRiddleController {
    * @return the response chat message
    * @throws ApiProxyException if there is an error communicating with the API proxy
    */
-  private ChatMessage runGpt(ChatMessage msg) throws ApiProxyException {
+  private Task<ChatMessage> runGpt(ChatMessage msg) throws ApiProxyException {
+    Task<ChatMessage> gptTask =
+        new Task<ChatMessage>() {
 
-    chatCompletionRequest.addMessage(msg);
-    try {
-      ChatCompletionResult chatCompletionResult = chatCompletionRequest.execute();
-      Choice result = chatCompletionResult.getChoices().iterator().next();
-      chatCompletionRequest.addMessage(result.getChatMessage());
-      appendChatMessage(result.getChatMessage());
-      return result.getChatMessage();
-    } catch (ApiProxyException e) {
-      // TODO handle exception appropriately
-      e.printStackTrace();
-      return null;
-    }
+          @Override
+          protected ChatMessage call() throws Exception {
+
+            chatCompletionRequest.addMessage(msg);
+            try {
+
+              ChatCompletionResult chatCompletionResult = chatCompletionRequest.execute();
+              Choice result = chatCompletionResult.getChoices().iterator().next();
+              chatCompletionRequest.addMessage(result.getChatMessage());
+
+              appendChatMessage(result.getChatMessage());
+              return result.getChatMessage();
+            } catch (ApiProxyException e) {
+              // TODO handle exception appropriately
+              e.printStackTrace();
+              return null;
+            }
+          }
+        };
+    return gptTask;
   }
 
   /**
@@ -103,21 +101,14 @@ public class FirstRiddleController {
     inputText.clear();
     ChatMessage msg = new ChatMessage("user", message);
     appendChatMessage(msg);
-    Task<Void> searchTask =
-        new Task<Void>() {
 
-          @Override
-          protected Void call() throws Exception {
+    Task<ChatMessage> gptTask = runGpt(msg);
+    // if (lastMsg.getRole().equals("assistant")
+    //  && lastMsg.getContent().startsWith("Correct")) {
+    // GameState.isRiddle1Resolved = true;
+    // }
 
-            ChatMessage lastMsg = runGpt(msg);
-            if (lastMsg.getRole().equals("assistant")
-                && lastMsg.getContent().startsWith("Correct")) {
-              GameState.isRiddle1Resolved = true;
-            }
-            return null;
-          }
-        };
-    Thread searchThread = new Thread(searchTask, "Search Thread");
+    Thread searchThread = new Thread(gptTask, "Search Thread");
     searchThread.start();
   }
 

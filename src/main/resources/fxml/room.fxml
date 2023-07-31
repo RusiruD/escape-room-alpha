@@ -25,8 +25,8 @@
             <Font name="Arial" size="35.0" />
          </font>
       </Label>
-      <Rectangle fx:id="vase" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="41.0" layoutX="424.0" layoutY="372.0" onMouseClicked="#clickVase" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="38.0" />
-      <Rectangle fx:id="window" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="132.0" layoutX="443.0" layoutY="103.0" onMouseClicked="#clickWindow" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="94.0" />
+      <Rectangle fx:id="weight" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="41.0" layoutX="424.0" layoutY="372.0" onMouseClicked="#clickWeight" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="38.0" />
+      <Rectangle fx:id="poster" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="132.0" layoutX="443.0" layoutY="103.0" onMouseClicked="#clickPoster" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="94.0" />
       <Rectangle fx:id="ball" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="67.0" layoutX="179.0" layoutY="353.0" onMouseClicked="#clickDoor" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="58.0" />
       <Button fx:id="btnStart" layoutX="268.0" layoutY="253.0" mnemonicParsing="false" onAction="#Start" text="Start Game" />
       <Button fx:id="bench" disable="true" layoutX="88.0" layoutY="140.0" mnemonicParsing="false" onAction="#benchClicked" opacity="0.0" prefHeight="75.0" prefWidth="159.0" text="bench" />

@@ -32,7 +32,7 @@ public class ChatController {
   public void initialize() throws ApiProxyException {
     chatCompletionRequest =
         new ChatCompletionRequest().setN(1).setTemperature(0.2).setTopP(0.5).setMaxTokens(100);
-    runGpt(new ChatMessage("user", GptPromptEngineering.getRiddleWithGivenWord("vase")));
+    runGpt(new ChatMessage("user", GptPromptEngineering.getRiddleWithGivenWord("bench press")));
   }
 
   /**
@@ -52,6 +52,7 @@ public class ChatController {
    * @throws ApiProxyException if there is an error communicating with the API proxy
    */
   private ChatMessage runGpt(ChatMessage msg) throws ApiProxyException {
+
     chatCompletionRequest.addMessage(msg);
     try {
       ChatCompletionResult chatCompletionResult = chatCompletionRequest.execute();
@@ -82,7 +83,9 @@ public class ChatController {
     inputText.clear();
     ChatMessage msg = new ChatMessage("user", message);
     appendChatMessage(msg);
+
     ChatMessage lastMsg = runGpt(msg);
+
     if (lastMsg.getRole().equals("assistant") && lastMsg.getContent().startsWith("Correct")) {
       GameState.isRiddleResolved = true;
     }
