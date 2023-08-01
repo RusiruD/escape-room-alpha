@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import nz.ac.auckland.se206.App;
@@ -23,7 +24,7 @@ public class FirstRiddleController {
   @FXML private TextArea chatTextArea;
   @FXML private TextField inputText;
   @FXML private Button sendButton;
-
+  @FXML private ProgressBar progressbar;
   private ChatCompletionRequest chatCompletionRequest;
 
   /**
@@ -33,7 +34,7 @@ public class FirstRiddleController {
    */
   @FXML
   public void initialize() throws ApiProxyException {
-
+    progressbar.setProgress(0);
     chatCompletionRequest =
         new ChatCompletionRequest().setN(1).setTemperature(0.2).setTopP(0.5).setMaxTokens(100);
     Task<ChatMessage> x =
@@ -70,11 +71,14 @@ public class FirstRiddleController {
             try {
 
               ChatCompletionResult chatCompletionResult = chatCompletionRequest.execute();
+
               Choice result = chatCompletionResult.getChoices().iterator().next();
               chatCompletionRequest.addMessage(result.getChatMessage());
 
               appendChatMessage(result.getChatMessage());
+              // progressbar.setProgress(0.9);
               return result.getChatMessage();
+
             } catch (ApiProxyException e) {
               // TODO handle exception appropriately
               e.printStackTrace();
@@ -82,6 +86,7 @@ public class FirstRiddleController {
             }
           }
         };
+
     return gptTask;
   }
 
@@ -94,21 +99,25 @@ public class FirstRiddleController {
    */
   @FXML
   private void onSendMessage(ActionEvent event) throws ApiProxyException, IOException {
+
     String message = inputText.getText();
     if (message.trim().isEmpty()) {
       return;
     }
     inputText.clear();
+    progressbar.setProgress(0.2);
     ChatMessage msg = new ChatMessage("user", message);
     appendChatMessage(msg);
 
     Task<ChatMessage> gptTask = runGpt(msg);
+
     // if (lastMsg.getRole().equals("assistant")
     //  && lastMsg.getContent().startsWith("Correct")) {
     // GameState.isRiddle1Resolved = true;
     // }
-
+    // progressbar.progressProperty().bind(gptTask.progressProperty());
     Thread searchThread = new Thread(gptTask, "Search Thread");
+
     searchThread.start();
   }
 

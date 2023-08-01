@@ -1,9 +1,11 @@
 package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import nz.ac.auckland.se206.App;
@@ -20,6 +22,8 @@ public class ChatController {
   @FXML private TextArea chatTextArea;
   @FXML private TextField inputText;
   @FXML private Button sendButton;
+  @FXML private ProgressIndicator indicator;
+  @FXML private Button back;
 
   private ChatCompletionRequest chatCompletionRequest;
 
@@ -54,12 +58,19 @@ public class ChatController {
   private ChatMessage runGpt(ChatMessage msg) throws ApiProxyException {
 
     chatCompletionRequest.addMessage(msg);
+    System.out.println("added message");
     try {
+
       ChatCompletionResult chatCompletionResult = chatCompletionRequest.execute();
+      System.out.println("chat completion result");
       Choice result = chatCompletionResult.getChoices().iterator().next();
+      System.out.println("got choices iterator next");
       chatCompletionRequest.addMessage(result.getChatMessage());
+      System.out.println("completion request");
       appendChatMessage(result.getChatMessage());
+      System.out.println("appended message");
       return result.getChatMessage();
+
     } catch (ApiProxyException e) {
       // TODO handle exception appropriately
       e.printStackTrace();
@@ -76,6 +87,9 @@ public class ChatController {
    */
   @FXML
   private void onSendMessage(ActionEvent event) throws ApiProxyException, IOException {
+    sendButton.setDisable(true);
+    back.setDisable(true);
+    indicator.setVisible(true);
     String message = inputText.getText();
     if (message.trim().isEmpty()) {
       return;
@@ -83,12 +97,28 @@ public class ChatController {
     inputText.clear();
     ChatMessage msg = new ChatMessage("user", message);
     appendChatMessage(msg);
+    Task<Void> searchTask =
+        new Task<Void>() {
 
-    ChatMessage lastMsg = runGpt(msg);
-
-    if (lastMsg.getRole().equals("assistant") && lastMsg.getContent().startsWith("Correct")) {
-      GameState.isRiddleResolved = true;
-    }
+          @Override
+          protected Void call() throws Exception {
+            System.out.println("task call method started");
+            ChatMessage lastMsg = runGpt(msg);
+            System.out.println("ran gpt");
+            indicator.setVisible(false);
+            sendButton.setDisable(false);
+            back.setDisable(false);
+            if (lastMsg.getRole().equals("assistant")
+                && lastMsg.getContent().startsWith("Correct")) {
+              GameState.isRiddleResolved = true;
+              System.out.println("game state dne");
+            }
+            return null;
+          }
+        };
+    Thread searchThread = new Thread(searchTask, "Search Thread");
+    searchThread.start();
+    System.out.println("started thread");
   }
 
   /**

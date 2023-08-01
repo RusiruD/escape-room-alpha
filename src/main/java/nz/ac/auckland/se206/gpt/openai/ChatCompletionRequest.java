@@ -141,6 +141,7 @@ public class ChatCompletionRequest {
    * @throws ApiProxyException if there is a problem executing the request
    */
   public ChatCompletionResult execute() throws ApiProxyException {
+    System.out.println("started execute");
     try {
       // Build JSON array for messages
       JsonArrayBuilder jsonMessages = Json.createArrayBuilder();
@@ -176,15 +177,16 @@ public class ChatCompletionRequest {
       }
 
       JsonObject value = jsonOverallBuilder.build();
-
+      System.out.println("made json and paramters");
       // Create and configure the HTTP request
       HttpPost httpPost = new HttpPost(URL_COMPLETION_ENDPOINT);
       httpPost.setHeader("Content-Type", "application/json");
       httpPost.setHeader("Accept", "application/json");
       httpPost.setEntity(new StringEntity(value.toString()));
       ObjectMapper mapperApiMapper = new ObjectMapper();
-
+      System.out.println("created and configured https request");
       // Send the HTTP request and process the response
+
       CloseableHttpClient client = HttpClients.createDefault();
       ResponseChatCompletion responseChat =
           (ResponseChatCompletion)
@@ -193,6 +195,7 @@ public class ChatCompletionRequest {
                   httpResponse ->
                       mapperApiMapper.readValue(
                           httpResponse.getEntity().getContent(), ResponseChatCompletion.class));
+      System.out.println("sent and got response of https request");
 
       // Check for API call success and handle any errors
       if (!responseChat.success && responseChat.code != 0) {
