@@ -1,6 +1,9 @@
 package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
+import java.util.Timer;
+import java.util.TimerTask;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
@@ -83,7 +86,17 @@ public class RoomController {
    */
   @FXML
   public void Start(ActionEvent event) throws IOException {
+    Timer myTimer = new Timer();
+    myTimer.schedule(
+        new TimerTask() {
 
+          @Override
+          public void run() {
+            System.out.println("endrld");
+            Platform.exit();
+          }
+        },
+        120000);
     btnGoToSafe.setDisable(false);
     clock.setDisable(false);
     clock.setVisible(true);
