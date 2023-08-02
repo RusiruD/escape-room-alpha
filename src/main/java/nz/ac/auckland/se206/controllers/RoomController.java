@@ -9,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ProgressIndicator;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Rectangle;
@@ -28,6 +29,8 @@ public class RoomController {
   @FXML private Button key;
 
   @FXML private Button clock;
+
+  @FXML private ProgressIndicator time;
 
   /** Initializes the room view, it is called when the room loads. */
   public void initialize() {
@@ -86,17 +89,42 @@ public class RoomController {
    */
   @FXML
   public void Start(ActionEvent event) throws IOException {
+    time.setProgress(0);
+
     Timer myTimer = new Timer();
-    myTimer.schedule(
+    myTimer.scheduleAtFixedRate(
         new TimerTask() {
+          double i = 0;
 
           @Override
           public void run() {
-            System.out.println("endrld");
-            Platform.exit();
+            if (i == 120) {
+              System.out.println("endrld");
+              Platform.exit();
+              myTimer.cancel();
+            }
+            System.out.println(i);
+
+            time.setProgress(i / 120);
+            i++;
           }
         },
-        120000);
+        0,
+        1000);
+    /*myTimer.schedule(
+    new TimerTask() {
+
+      @Override
+      public void run() {
+        if (myTimer.equals(4000)) {
+          System.out.println("4");
+        }
+        System.out.println("endrld");
+        Platform.exit();
+      }
+    },
+    120000);*/
+
     btnGoToSafe.setDisable(false);
     clock.setDisable(false);
     clock.setVisible(true);
