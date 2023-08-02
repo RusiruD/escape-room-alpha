@@ -4,12 +4,14 @@ import java.io.IOException;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
+import nz.ac.auckland.se206.controllers.SceneManagerAi.AppUi;
 import nz.ac.auckland.se206.gpt.ChatMessage;
 import nz.ac.auckland.se206.gpt.GptPromptEngineering;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
@@ -92,6 +94,9 @@ public class ChatController {
     indicator.setVisible(true);
     String message = inputText.getText();
     if (message.trim().isEmpty()) {
+      indicator.setVisible(false);
+      sendButton.setDisable(false);
+      back.setDisable(false);
       return;
     }
     inputText.clear();
@@ -110,15 +115,17 @@ public class ChatController {
             back.setDisable(false);
             if (lastMsg.getRole().equals("assistant")
                 && lastMsg.getContent().startsWith("Correct")) {
+
               GameState.isRiddleResolved = true;
-              System.out.println("game state dne");
+              System.out.println(GameState.isRiddleResolved);
             }
             return null;
           }
         };
+
     Thread searchThread = new Thread(searchTask, "Search Thread");
     searchThread.start();
-    System.out.println("started thread");
+    System.out.println(GameState.isRiddleResolved);
   }
 
   /**
@@ -130,6 +137,14 @@ public class ChatController {
    */
   @FXML
   private void onGoBack(ActionEvent event) throws ApiProxyException, IOException {
-    App.setRoot("room");
+    System.out.println(GameState.isRiddleResolved);
+    if (GameState.isRiddleResolved) {
+
+      Button button = (Button) event.getSource();
+      Scene sceneButtonIsIn = button.getScene();
+      sceneButtonIsIn.setRoot(SceneManagerAi.getUiRoot(AppUi.ESCAPE_ROOM));
+    } else {
+      App.setRoot("room");
+    }
   }
 }
