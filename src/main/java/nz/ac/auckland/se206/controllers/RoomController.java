@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
 import javafx.application.Platform;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
@@ -102,9 +103,43 @@ public class RoomController {
    */
   @FXML
   public void Start(ActionEvent event) throws IOException {
+    long startTime = System.currentTimeMillis();
     time.setProgress(0);
     textToSpeech = new TextToSpeech();
-    textToSpeech.speak("You have 2 minutes remaining", "to escape the gym");
+
+    Task<Void> TwoMinutes =
+        new Task<Void>() {
+
+          @Override
+          protected Void call() throws Exception {
+
+            textToSpeech.speak("You have 2 minutes remaining", "to escape the gym");
+            return null;
+          }
+        };
+    Thread reminder1 = new Thread(TwoMinutes, "Search Thread");
+    reminder1.start();
+    Task<Void> OneMinute =
+        new Task<Void>() {
+
+          @Override
+          protected Void call() throws Exception {
+
+            textToSpeech.speak("You have 1 minute remaining", "to escape the gym");
+            return null;
+          }
+        };
+
+    Task<Void> ThirtySeconds =
+        new Task<Void>() {
+
+          @Override
+          protected Void call() throws Exception {
+
+            textToSpeech.speak("You have 30 seconds remaining to escape", "Tick Tock");
+            return null;
+          }
+        };
 
     Timer myTimer = new Timer();
     myTimer.scheduleAtFixedRate(
@@ -115,15 +150,20 @@ public class RoomController {
           public void run() {
 
             if (i == 120) {
-              System.out.println("endrld");
               Platform.exit();
               myTimer.cancel();
+              long time = System.currentTimeMillis() - startTime;
+
+              System.out.println(" took " + time + "ms");
+              System.out.println("endrld");
             }
             if (i == 60) {
-              textToSpeech.speak("You have 1 minute remaining", "to escape the gym");
+              Thread reminder2 = new Thread(OneMinute, "Search Thread");
+              reminder2.start();
             }
             if (i == 90) {
-              textToSpeech.speak("You have 30 seconds left", "time is running out, Tick Tock");
+              Thread reminder3 = new Thread(ThirtySeconds, "Search Thread");
+              reminder3.start();
             }
             System.out.println(i);
 
