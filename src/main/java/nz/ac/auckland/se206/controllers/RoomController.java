@@ -31,9 +31,13 @@ public class RoomController {
   @FXML private Button clock;
 
   @FXML private ProgressIndicator time;
+  @FXML private Button btnReturnToFirstRiddle;
 
   /** Initializes the room view, it is called when the room loads. */
   public void initialize() {
+    System.out.println("initialixe");
+    btnReturnToFirstRiddle.setDisable(true);
+    btnReturnToFirstRiddle.setVisible(false);
     // Initialization code goes here
 
   }
@@ -46,6 +50,13 @@ public class RoomController {
   @FXML
   public void onKeyPressed(KeyEvent event) {
     System.out.println("key " + event.getCode() + " pressed");
+  }
+
+  @FXML
+  public void ReturnToFirstRiddle(ActionEvent event) throws IOException {
+    Button button = (Button) event.getSource();
+    Scene sceneButtonIsIn = button.getScene();
+    sceneButtonIsIn.setRoot(SceneManagerAi.getUiRoot(AppUi.FIRST_RIDDLE));
   }
 
   /**
@@ -133,7 +144,8 @@ public class RoomController {
     ball.setDisable(false);
     bench.setDisable(false);
     // bench.setVisible(true);
-
+    btnReturnToFirstRiddle.setDisable(false);
+    btnReturnToFirstRiddle.setVisible(true);
     clock.setDisable(false);
 
     Button button = (Button) event.getSource();
@@ -142,31 +154,33 @@ public class RoomController {
   }
 
   public void clickDoor(MouseEvent event) throws IOException {
-    System.out.println("door clicked");
+    if (GameState.isRiddleResolved) {
+      System.out.println("door clicked");
 
-    // if (!GameState.isRiddleResolved) {
-    // showDialog("Info", "Riddle", "You need to resolve the riddle!");
-    // App.setRoot("chat");
-    // return;
-    // }
-    // if (!GameState.isRiddleResolved) {
-    // showDialog("Info", "Riddle", "You need to resolve the riddle!");
-    // App.setRoot("chat");
-    // return;
-    // }
+      // if (!GameState.isRiddleResolved) {
+      // showDialog("Info", "Riddle", "You need to resolve the riddle!");
+      // App.setRoot("chat");
+      // return;
+      // }
+      // if (!GameState.isRiddleResolved) {
+      // showDialog("Info", "Riddle", "You need to resolve the riddle!");
+      // App.setRoot("chat");
+      // return;
+      // }
 
-    if (!GameState.isKeyFound) {
-      showDialog("Info", "Find the key!", " the key is.");
-      showDialog("Info", "Find the key!", " the key is.");
-    } else {
+      if (!GameState.isKeyFound) {
+        showDialog("Info", "Find the key!", " the key is.");
+        showDialog("Info", "Find the key!", " the key is.");
+      } else {
 
-      showDialog("Info", "You Won!", "Good Job!");
+        showDialog("Info", "You Won!", "Good Job!");
 
-      bench.setDisable(true);
-      bench.setVisible(false);
+        bench.setDisable(true);
+        bench.setVisible(false);
 
-      bench.setDisable(true);
-      bench.setVisible(false);
+        bench.setDisable(true);
+        bench.setVisible(false);
+      }
     }
   }
 
@@ -189,35 +203,30 @@ public class RoomController {
 
   @FXML
   public void clockClicked(ActionEvent event) {
+    if (GameState.isRiddleResolved) {
+      x++;
+      System.out.println("clock clicked");
+      if (x == 3) {
+        // showDialog("Info", "You Lost!", "You broke the window!");
+        // System.exit(0);
 
-    x++;
-    System.out.println("clock clicked");
-    if (x == 3) {
-      // showDialog("Info", "You Lost!", "You broke the window!");
-      // System.exit(0);
-
-      Button button = (Button) event.getSource();
-      Scene sceneButtonIsIn = button.getScene();
-      sceneButtonIsIn.setRoot(SceneManagerAi.getUiRoot(AppUi.PASSCODEHINT));
+        Button button = (Button) event.getSource();
+        Scene sceneButtonIsIn = button.getScene();
+        sceneButtonIsIn.setRoot(SceneManagerAi.getUiRoot(AppUi.PASSCODEHINT));
+      }
     }
   }
 
   @FXML
-  public void clickPoster(MouseEvent event) {
-
-    x++;
-    if (x == 3) {
-      // showDialog("Info", "You Lost!", "You broke the window!");
-      // System.exit(0);
-
-    }
-  }
+  public void clickPoster(MouseEvent event) {}
 
   @FXML
   public void benchClicked(ActionEvent event) throws IOException {
-    Button button = (Button) event.getSource();
-    Scene sceneButtonIsIn = button.getScene();
-    sceneButtonIsIn.setRoot(SceneManagerAi.getUiRoot(AppUi.FOLDER));
+    if (GameState.isRiddleResolved) {
+      Button button = (Button) event.getSource();
+      Scene sceneButtonIsIn = button.getScene();
+      sceneButtonIsIn.setRoot(SceneManagerAi.getUiRoot(AppUi.FOLDER));
+    }
     // System.out.println("bench clicked");
     // x++;
     //      System.out.println("dsss");
@@ -226,15 +235,17 @@ public class RoomController {
 
   @FXML
   public void GoToSafe(ActionEvent event) throws IOException {
-    if (!GameState.isSafeOpen) {
-      Button button = (Button) event.getSource();
-      Scene sceneButtonIsIn = button.getScene();
-      sceneButtonIsIn.setRoot(SceneManagerAi.getUiRoot(AppUi.SAFE));
-    } else {
-      btnGoToSafe.setDisable(true);
-      btnGoToSafe.setVisible(false);
-      key.setVisible(true);
-      key.setDisable(false);
+    if (GameState.isRiddle1Resolved) {
+      if (!GameState.isSafeOpen) {
+        Button button = (Button) event.getSource();
+        Scene sceneButtonIsIn = button.getScene();
+        sceneButtonIsIn.setRoot(SceneManagerAi.getUiRoot(AppUi.SAFE));
+      } else {
+        btnGoToSafe.setDisable(true);
+        btnGoToSafe.setVisible(false);
+        key.setVisible(true);
+        key.setDisable(false);
+      }
     }
   }
 }

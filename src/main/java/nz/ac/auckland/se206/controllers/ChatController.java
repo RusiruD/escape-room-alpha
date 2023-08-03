@@ -9,7 +9,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.controllers.SceneManagerAi.AppUi;
 import nz.ac.auckland.se206.gpt.ChatMessage;
@@ -138,13 +137,9 @@ public class ChatController {
   @FXML
   private void onGoBack(ActionEvent event) throws ApiProxyException, IOException {
     System.out.println(GameState.isRiddleResolved);
-    if (GameState.isRiddleResolved) {
 
-      Button button = (Button) event.getSource();
-      Scene sceneButtonIsIn = button.getScene();
-      sceneButtonIsIn.setRoot(SceneManagerAi.getUiRoot(AppUi.ESCAPE_ROOM));
-    } else {
-      App.setRoot("room");
-    }
+    Button button = (Button) event.getSource();
+    Scene sceneButtonIsIn = button.getScene();
+    sceneButtonIsIn.setRoot(SceneManagerAi.getUiRoot(AppUi.ESCAPE_ROOM));
   }
 }
