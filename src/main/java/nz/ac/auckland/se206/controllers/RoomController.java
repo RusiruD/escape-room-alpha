@@ -15,9 +15,11 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Rectangle;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.controllers.SceneManagerAi.AppUi;
+import nz.ac.auckland.se206.speech.TextToSpeech;
 
 /** Controller class for the room view. */
 public class RoomController {
+  private TextToSpeech textToSpeech;
   @FXML private Button btnStart;
   @FXML private Button btnGoToSafe;
 
@@ -101,6 +103,8 @@ public class RoomController {
   @FXML
   public void Start(ActionEvent event) throws IOException {
     time.setProgress(0);
+    textToSpeech = new TextToSpeech();
+    textToSpeech.speak("You have 2 minutes remaining", "to escape the gym");
 
     Timer myTimer = new Timer();
     myTimer.scheduleAtFixedRate(
@@ -109,10 +113,17 @@ public class RoomController {
 
           @Override
           public void run() {
+
             if (i == 120) {
               System.out.println("endrld");
               Platform.exit();
               myTimer.cancel();
+            }
+            if (i == 60) {
+              textToSpeech.speak("You have 1 minute remaining", "to escape the gym");
+            }
+            if (i == 90) {
+              textToSpeech.speak("You have 30 seconds left", "time is running out, Tick Tock");
             }
             System.out.println(i);
 
@@ -235,7 +246,7 @@ public class RoomController {
 
   @FXML
   public void GoToSafe(ActionEvent event) throws IOException {
-    if (GameState.isRiddle1Resolved) {
+    if (GameState.isRiddleResolved) {
       if (!GameState.isSafeOpen) {
         Button button = (Button) event.getSource();
         Scene sceneButtonIsIn = button.getScene();

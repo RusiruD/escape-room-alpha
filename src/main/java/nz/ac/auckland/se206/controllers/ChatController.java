@@ -5,6 +5,7 @@ import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TextArea;
@@ -79,6 +80,14 @@ public class ChatController {
     }
   }
 
+  private void showDialog(String title, String headerText, String message) {
+    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+    alert.setTitle(title);
+    alert.setHeaderText(headerText);
+    alert.setContentText(message);
+    alert.showAndWait();
+  }
+
   /**
    * Sends a message to the GPT model.
    *
@@ -136,6 +145,12 @@ public class ChatController {
    */
   @FXML
   private void onGoBack(ActionEvent event) throws ApiProxyException, IOException {
+    if (GameState.isRiddleResolved == false) {
+      showDialog(
+          "Info",
+          "Answer the riddle",
+          " You must eventually answer the riddle to proceed with the game");
+    }
     System.out.println(GameState.isRiddleResolved);
 
     Button button = (Button) event.getSource();
