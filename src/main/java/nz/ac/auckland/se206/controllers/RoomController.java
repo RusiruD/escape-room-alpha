@@ -32,7 +32,7 @@ public class RoomController {
   @FXML private Button key;
 
   @FXML private Button clock;
-
+  @FXML private Rectangle weight1;
   @FXML private ProgressIndicator time;
   @FXML private Button btnReturnToFirstRiddle;
 
@@ -245,6 +245,11 @@ public class RoomController {
     System.out.println("weight clicked");
   }
 
+  @FXML
+  public void clickWeight1(MouseEvent event) {
+    System.out.println("weight1 clicked");
+  }
+
   /**
    * Handles the click event on the window.
    *
@@ -258,6 +263,7 @@ public class RoomController {
       x++;
       System.out.println("clock clicked");
       if (x == 3) {
+        x = 0;
         // showDialog("Info", "You Lost!", "You broke the window!");
         // System.exit(0);
 
@@ -269,10 +275,13 @@ public class RoomController {
   }
 
   @FXML
-  public void clickPoster(MouseEvent event) {}
+  public void clickPoster(MouseEvent event) {
+    System.out.println("poster clicked");
+  }
 
   @FXML
   public void benchClicked(ActionEvent event) throws IOException {
+    System.out.println("bench clicked");
     if (GameState.isRiddleResolved) {
       Button button = (Button) event.getSource();
       Scene sceneButtonIsIn = button.getScene();
@@ -286,6 +295,7 @@ public class RoomController {
 
   @FXML
   public void GoToSafe(ActionEvent event) throws IOException {
+    System.out.println("safe clicked");
     if (GameState.isRiddleResolved) {
       if (!GameState.isSafeOpen) {
         Button button = (Button) event.getSource();

@@ -18,6 +18,7 @@ import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 import nz.ac.auckland.se206.gpt.openai.ChatCompletionRequest;
 import nz.ac.auckland.se206.gpt.openai.ChatCompletionResult;
 import nz.ac.auckland.se206.gpt.openai.ChatCompletionResult.Choice;
+import nz.ac.auckland.se206.speech.TextToSpeech;
 
 /** Controller class for the chat view. */
 public class ChatController {
@@ -97,6 +98,28 @@ public class ChatController {
    */
   @FXML
   private void onSendMessage(ActionEvent event) throws ApiProxyException, IOException {
+    TextToSpeech textToSpeech = new TextToSpeech();
+    Task<Void> Right =
+        new Task<Void>() {
+
+          @Override
+          protected Void call() throws Exception {
+
+            textToSpeech.speak("Good Guess You Got It Right");
+            return null;
+          }
+        };
+    Task<Void> Wrong =
+        new Task<Void>() {
+
+          @Override
+          protected Void call() throws Exception {
+
+            textToSpeech.speak("Wrong Guess Try Again");
+            return null;
+          }
+        };
+
     sendButton.setDisable(true);
     back.setDisable(true);
     indicator.setVisible(true);
@@ -123,9 +146,13 @@ public class ChatController {
             back.setDisable(false);
             if (lastMsg.getRole().equals("assistant")
                 && lastMsg.getContent().startsWith("Correct")) {
-
+              Thread correct = new Thread(Right, "correct thread");
+              correct.start();
               GameState.isRiddleResolved = true;
               System.out.println(GameState.isRiddleResolved);
+            } else {
+              Thread wrong = new Thread(Wrong, "wrong thread");
+              wrong.start();
             }
             return null;
           }
