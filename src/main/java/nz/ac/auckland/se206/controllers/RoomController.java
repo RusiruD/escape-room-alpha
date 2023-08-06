@@ -152,6 +152,9 @@ public class RoomController {
             if (i == 120) {
               Platform.exit();
               myTimer.cancel();
+              TwoMinutes.cancel();
+              OneMinute.cancel();
+              ThirtySeconds.cancel();
               long time = System.currentTimeMillis() - startTime;
 
               System.out.println(" took " + time + "ms");
