@@ -13,12 +13,7 @@
    <children>
       <ImageView fitHeight="378.0" fitWidth="494.0" layoutX="59.0" layoutY="65.0">
          <image>
-            <Image url="@../images/gym.jpg" />
-         </image>
-      </ImageView>
-      <ImageView blendMode="DARKEN" fitHeight="60.0" fitWidth="94.0" layoutX="59.0" layoutY="376.0">
-         <image>
-            <Image url="@../images/safe.jpg" />
+            <Image url="@../images/scene.jpg" />
          </image>
       </ImageView>
       <Label layoutX="30.0" layoutY="24.0" prefHeight="41.0" prefWidth="549.0" text="SOFTENG 206 - ESCAPE ROOM">
@@ -26,15 +21,22 @@
             <Font name="Arial" size="35.0" />
          </font>
       </Label>
-      <Rectangle fx:id="weight" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="41.0" layoutX="424.0" layoutY="372.0" onMouseClicked="#clickWeight" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="38.0" />
-      <Rectangle fx:id="poster" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="132.0" layoutX="443.0" layoutY="103.0" onMouseClicked="#clickPoster" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="94.0" />
-      <Rectangle fx:id="ball" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="67.0" layoutX="179.0" layoutY="353.0" onMouseClicked="#clickDoor" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="58.0" />
-      <Rectangle fx:id="weight1" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="41.0" layoutX="343.0" layoutY="380.0" onMouseClicked="#clickWeight1" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="58.0" />
-      <Button fx:id="btnStart" layoutX="268.0" layoutY="253.0" mnemonicParsing="false" onAction="#Start" text="Start Game" />
-      <Button fx:id="bench" disable="true" layoutX="88.0" layoutY="140.0" mnemonicParsing="false" onAction="#benchClicked" opacity="0.0" prefHeight="132.0" prefWidth="159.0" text="bench" />
-      <Button fx:id="clock" layoutX="63.0" layoutY="89.0" mnemonicParsing="false" onAction="#clockClicked" opacity="0.0" prefHeight="52.0" prefWidth="58.0" text="Clock" />
-      <Button fx:id="btnGoToSafe" disable="true" layoutX="59.0" layoutY="376.0" mnemonicParsing="false" onAction="#GoToSafe" opacity="0.0" prefHeight="48.0" prefWidth="94.0" text="safe" />
-      <Button fx:id="key" layoutX="71.0" layoutY="380.0" mnemonicParsing="false" onAction="#PickUpKey" prefHeight="41.0" prefWidth="65.0" visible="false">
+      <Rectangle fx:id="weight" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="69.0" layoutX="230.0" layoutY="276.0" onMouseClicked="#clickWeight" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="94.0" />
+      <Rectangle fx:id="poster" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="52.0" layoutX="160.0" layoutY="99.0" onMouseClicked="#clickPoster" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="94.0" />
+      <Rectangle fx:id="ball" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="52.0" layoutX="210.0" layoutY="165.0" onMouseClicked="#clickDoor" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="26.0" />
+      <Rectangle fx:id="weight1" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="41.0" layoutX="333.0" layoutY="333.0" onMouseClicked="#clickWeight1" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="71.0" />
+      <Button fx:id="btnStart" layoutX="268.0" layoutY="242.0" mnemonicParsing="false" onAction="#Start" text="Start Game" />
+      <Button fx:id="bench" disable="true" layoutX="104.0" layoutY="312.0" mnemonicParsing="false" onAction="#benchClicked" opacity="0.0" prefHeight="105.0" prefWidth="132.0" text="bench" />
+      <Button fx:id="clock" layoutX="94.0" layoutY="129.0" mnemonicParsing="false" onAction="#clockClicked" opacity="0.0" prefHeight="175.0" prefWidth="51.0" text="Clock" />
+      <ProgressIndicator fx:id="time" layoutX="63.0" layoutY="69.0" prefHeight="52.0" prefWidth="32.0" progress="0.0" />
+      <Button fx:id="btnReturnToFirstRiddle" layoutX="489.0" layoutY="419.0" mnemonicParsing="false" onAction="#ReturnToFirstRiddle" text="1st riddle" />
+      <ImageView blendMode="DARKEN" fitHeight="78.0" fitWidth="94.0" layoutX="268.0" layoutY="365.0">
+         <image>
+            <Image url="@../images/icon-seif_generated.jpg" />
+         </image>
+      </ImageView>
+      <Button fx:id="btnGoToSafe" disable="true" layoutX="279.0" layoutY="373.0" mnemonicParsing="false" onAction="#GoToSafe" opacity="0.0" prefHeight="69.0" prefWidth="75.0" text="safe" />
+      <Button fx:id="key" layoutX="281.0" layoutY="378.0" mnemonicParsing="false" onAction="#PickUpKey" prefHeight="41.0" prefWidth="65.0" visible="false">
          <graphic>
             <ImageView fitHeight="44.0" fitWidth="61.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -42,7 +44,5 @@
                </image>
             </ImageView>
          </graphic></Button>
-      <ProgressIndicator fx:id="time" layoutX="63.0" layoutY="69.0" prefHeight="52.0" prefWidth="32.0" progress="0.0" />
-      <Button fx:id="btnReturnToFirstRiddle" layoutX="489.0" layoutY="419.0" mnemonicParsing="false" onAction="#ReturnToFirstRiddle" text="1st riddle" />
    </children>
 </Pane>

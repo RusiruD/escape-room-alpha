@@ -71,6 +71,7 @@ public class ApiProxyConfig {
    * @return the email
    */
   public String getEmail() {
+
     return email;
   }
 

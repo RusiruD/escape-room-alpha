@@ -2,6 +2,7 @@ package nz.ac.auckland.se206;
 
 import java.io.IOException;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -54,6 +55,14 @@ public class App extends Application {
     // scene.getStylesheets().add("/css/style.css");
     // String css = this.getClass().getResource("/css/style.css").toExternalForm();
     stage.setScene(scene);
+
+    stage.setOnCloseRequest(
+        event -> {
+          // Intercept the close request and perform cleanup
+          System.out.println("Closing application");
+          GameState.isGameActive = false;
+          Platform.exit(); // Close the JavaFX application
+        });
     stage.show();
 
     // Parent root = loadFxml("room");

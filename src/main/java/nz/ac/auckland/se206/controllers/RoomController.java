@@ -38,7 +38,7 @@ public class RoomController {
 
   /** Initializes the room view, it is called when the room loads. */
   public void initialize() {
-    System.out.println("initialixe");
+
     btnReturnToFirstRiddle.setDisable(true);
     btnReturnToFirstRiddle.setVisible(false);
     // Initialization code goes here
@@ -148,34 +148,34 @@ public class RoomController {
 
           @Override
           public void run() {
+            if (GameState.isGameActive == true) {
+              if (i == 120) {
+                Platform.exit();
+                myTimer.cancel();
 
-            if (i == 120) {
-              Platform.exit();
-              myTimer.cancel();
-              TwoMinutes.cancel();
-              OneMinute.cancel();
-              ThirtySeconds.cancel();
-              long time = System.currentTimeMillis() - startTime;
+                long time = System.currentTimeMillis() - startTime;
 
-              System.out.println(" took " + time + "ms");
-              System.out.println("endrld");
-            }
-            if (i == 60) {
-              Thread reminder2 = new Thread(OneMinute, "Search Thread");
-              reminder2.start();
-            }
-            if (i == 90) {
-              Thread reminder3 = new Thread(ThirtySeconds, "Search Thread");
-              reminder3.start();
-            }
-            System.out.println(i);
+                System.out.println(" took " + time + "ms");
+                System.out.println("endrld");
+              }
+              if (i == 60) {
+                Thread reminder2 = new Thread(OneMinute, "Search Thread");
+                reminder2.start();
+              }
+              if (i == 90) {
+                Thread reminder3 = new Thread(ThirtySeconds, "Search Thread");
+                reminder3.start();
+              }
+              System.out.println(i);
 
-            time.setProgress(i / 120);
-            i++;
+              time.setProgress(i / 120);
+              i++;
+            }
           }
         },
         0,
         1000);
+
     /*myTimer.schedule(
     new TimerTask() {
 

@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "TextToSpeech",
+            "request": "launch",
+            "mainClass": "nz.ac.auckland.se206.speech.TextToSpeech",
+            "projectName": "escaipe-room-alpha"
+        },
+        {
+            "type": "java",
             "name": "App",
             "request": "launch",
             "mainClass": "nz.ac.auckland.se206.App",
