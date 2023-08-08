@@ -99,7 +99,7 @@ public class ChatController {
   @FXML
   private void onSendMessage(ActionEvent event) throws ApiProxyException, IOException {
     TextToSpeech textToSpeech = new TextToSpeech();
-    Task<Void> Right =
+    Task<Void> rightAnswer =
         new Task<Void>() {
 
           @Override
@@ -109,7 +109,7 @@ public class ChatController {
             return null;
           }
         };
-    Task<Void> Wrong =
+    Task<Void> wrongAnswer =
         new Task<Void>() {
 
           @Override
@@ -146,12 +146,12 @@ public class ChatController {
             back.setDisable(false);
             if (lastMsg.getRole().equals("assistant")
                 && lastMsg.getContent().startsWith("Correct")) {
-              Thread correct = new Thread(Right, "correct thread");
+              Thread correct = new Thread(rightAnswer, "correct thread");
               correct.start();
               GameState.isRiddleResolved = true;
               System.out.println(GameState.isRiddleResolved);
             } else {
-              Thread wrong = new Thread(Wrong, "wrong thread");
+              Thread wrong = new Thread(wrongAnswer, "wrong thread");
               wrong.start();
             }
             return null;

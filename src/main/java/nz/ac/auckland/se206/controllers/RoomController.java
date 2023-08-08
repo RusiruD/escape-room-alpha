@@ -28,8 +28,8 @@ public class RoomController {
   @FXML protected Button btnYogaBall;
 
   @FXML private Button key;
-
-  @FXML private Button boxingbag;
+  @FXML private Rectangle window;
+  @FXML private Button boxingBag;
   @FXML private Rectangle weight1;
   @FXML private Rectangle towels;
   @FXML private Rectangle weight2;
@@ -37,13 +37,6 @@ public class RoomController {
   @FXML private Button btnReturnToFirstRiddle;
 
   /** Initializes the room view, it is called when the room loads. */
-  public void initialize() {
-
-    btnReturnToFirstRiddle.setDisable(true);
-    btnReturnToFirstRiddle.setVisible(false);
-    // Initialization code goes here
-
-  }
 
   /**
    * Handles the key pressed event.
@@ -72,14 +65,6 @@ public class RoomController {
     System.out.println("key " + event.getCode() + " released");
   }
 
-  @FXML
-  public void PickUpKey() {
-    System.out.println("key picked up");
-    key.setDisable(true);
-    key.setVisible(false);
-    GameState.isKeyFound = true;
-  }
-
   /**
    * Displays a dialog box with the given title, header text, and message.
    *
@@ -102,12 +87,12 @@ public class RoomController {
    * @throws IOException if there is an error loading the chat view
    */
   @FXML
-  public void Start(ActionEvent event) throws IOException {
+  public void start(ActionEvent event) throws IOException {
     long startTime = System.currentTimeMillis();
     time.setProgress(0);
     textToSpeech = new TextToSpeech();
 
-    Task<Void> TwoMinutes =
+    Task<Void> twoMinutes =
         new Task<Void>() {
 
           @Override
@@ -117,9 +102,9 @@ public class RoomController {
             return null;
           }
         };
-    Thread reminder1 = new Thread(TwoMinutes, "Search Thread");
+    Thread reminder1 = new Thread(twoMinutes, "Search Thread");
     reminder1.start();
-    Task<Void> OneMinute =
+    Task<Void> oneMinute =
         new Task<Void>() {
 
           @Override
@@ -130,7 +115,7 @@ public class RoomController {
           }
         };
 
-    Task<Void> ThirtySeconds =
+    Task<Void> thirtySeconds =
         new Task<Void>() {
 
           @Override
@@ -159,11 +144,11 @@ public class RoomController {
                 System.out.println("endrld");
               }
               if (i == 60) {
-                Thread reminder2 = new Thread(OneMinute, "Search Thread");
+                Thread reminder2 = new Thread(oneMinute, "Search Thread");
                 reminder2.start();
               }
               if (i == 90) {
-                Thread reminder3 = new Thread(ThirtySeconds, "Search Thread");
+                Thread reminder3 = new Thread(thirtySeconds, "Search Thread");
                 reminder3.start();
               }
               System.out.println(i);
@@ -176,28 +161,15 @@ public class RoomController {
         0,
         1000);
 
-    /*myTimer.schedule(
-    new TimerTask() {
-
-      @Override
-      public void run() {
-        if (myTimer.equals(4000)) {
-          System.out.println("4");
-        }
-        System.out.println("endrld");
-        Platform.exit();
-      }
-    },
-    120000);*/
-
     btnGoToSafe.setDisable(false);
-    boxingbag.setDisable(false);
-    boxingbag.setVisible(true);
+    boxingBag.setDisable(false);
+    boxingBag.setVisible(true);
     btnStart.setDisable(true);
     btnStart.setVisible(false);
     bottle.setDisable(false);
+    window.setDisable(false);
     btnYogaBall.setDisable(false);
-    // bench.setVisible(true);
+
     btnReturnToFirstRiddle.setDisable(false);
     btnReturnToFirstRiddle.setVisible(true);
 
@@ -206,24 +178,14 @@ public class RoomController {
     sceneButtonIsIn.setRoot(SceneManagerAi.getUiRoot(AppUi.FIRST_RIDDLE));
   }
 
-  public void clickDoor(MouseEvent event) throws IOException {
+  public void clickWindow(MouseEvent event) throws IOException {
     if (GameState.isRiddleResolved) {
       System.out.println("door clicked");
 
-      // if (!GameState.isRiddleResolved) {
-      // showDialog("Info", "Riddle", "You need to resolve the riddle!");
-      // App.setRoot("chat");
-      // return;
-      // }
-      // if (!GameState.isRiddleResolved) {
-      // showDialog("Info", "Riddle", "You need to resolve the riddle!");
-      // App.setRoot("chat");
-      // return;
-      // }
-
       if (!GameState.isKeyFound) {
-        showDialog("Info", "Find the key!", " the key is.");
-        showDialog("Info", "Find the key!", " the key is.");
+
+        showDialog("Info", "Find the key!", "");
+
       } else {
 
         showDialog("Info", "You Won!", "Good Job!");
@@ -246,7 +208,7 @@ public class RoomController {
 
   @FXML
   public void clickWeight1(MouseEvent event) {
-    System.out.println("weight1 clicked");
+    System.out.println("weight clicked");
   }
 
   /**
@@ -257,14 +219,12 @@ public class RoomController {
   int x = 0;
 
   @FXML
-  public void boxingbagclicked(ActionEvent event) {
+  public void boxingBagClicked(ActionEvent event) {
     if (GameState.isRiddleResolved) {
       x++;
       System.out.println("boxing bag clicked");
       if (x == 3) {
         x = 0;
-        // showDialog("Info", "You Lost!", "You broke the window!");
-        // System.exit(0);
 
         Button button = (Button) event.getSource();
         Scene sceneButtonIsIn = button.getScene();
@@ -279,6 +239,11 @@ public class RoomController {
   }
 
   @FXML
+  public void clickBottle(MouseEvent event) {
+    System.out.println("Bottle  clicked");
+  }
+
+  @FXML
   public void ballClicked(ActionEvent event) throws IOException {
     System.out.println("yoga ball clicked");
     if (GameState.isRiddleResolved) {
@@ -286,14 +251,10 @@ public class RoomController {
       Scene sceneButtonIsIn = button.getScene();
       sceneButtonIsIn.setRoot(SceneManagerAi.getUiRoot(AppUi.FOLDER));
     }
-    // System.out.println("bench clicked");
-    // x++;
-    //      System.out.println("dsss");
-    // }
   }
 
   @FXML
-  public void GoToSafe(ActionEvent event) throws IOException {
+  public void goToSafe(ActionEvent event) throws IOException {
     System.out.println("safe clicked");
     if (GameState.isRiddleResolved) {
       if (!GameState.isSafeOpen) {
@@ -307,5 +268,21 @@ public class RoomController {
         key.setDisable(false);
       }
     }
+  }
+
+  public void initialize() {
+
+    btnReturnToFirstRiddle.setDisable(true);
+    btnReturnToFirstRiddle.setVisible(false);
+    // Initialization code goes here
+
+  }
+
+  @FXML
+  public void pickUpKey() {
+    System.out.println("key picked up");
+    key.setDisable(true);
+    key.setVisible(false);
+    GameState.isKeyFound = true;
   }
 }

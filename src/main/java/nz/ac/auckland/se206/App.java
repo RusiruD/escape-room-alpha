@@ -52,8 +52,7 @@ public class App extends Application {
     SceneManagerAi.addUi(AppUi.FOLDER, loadFxml("secondRiddle"));
     SceneManagerAi.addUi(AppUi.PASSCODEHINT, loadFxml("thirdRiddle"));
     scene = new Scene(SceneManagerAi.getUiRoot(AppUi.ESCAPE_ROOM), 600, 470);
-    // scene.getStylesheets().add("/css/style.css");
-    // String css = this.getClass().getResource("/css/style.css").toExternalForm();
+
     stage.setScene(scene);
 
     stage.setOnCloseRequest(
@@ -64,13 +63,5 @@ public class App extends Application {
           Platform.exit(); // Close the JavaFX application
         });
     stage.show();
-
-    // Parent root = loadFxml("room");
-
-    // root.requestFocus();
-
-    // Parent root = loadFxml("room");
-
-    // root.requestFocus();
   }
 }

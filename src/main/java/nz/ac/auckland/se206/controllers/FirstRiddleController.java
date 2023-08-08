@@ -110,11 +110,6 @@ public class FirstRiddleController {
 
     Task<ChatMessage> gptTask = runGpt(msg);
 
-    // if (lastMsg.getRole().equals("assistant")
-    //  && lastMsg.getContent().startsWith("Correct")) {
-    // GameState.isRiddle1Resolved = true;
-    // }
-    // progressbar.progressProperty().bind(gptTask.progressProperty());
     Thread searchThread = new Thread(gptTask, "Search Thread");
 
     searchThread.start();
@@ -134,8 +129,6 @@ public class FirstRiddleController {
       Button button = (Button) event.getSource();
       Scene sceneButtonIsIn = button.getScene();
       sceneButtonIsIn.setRoot(SceneManagerAi.getUiRoot(AppUi.ESCAPE_ROOM));
-    } else {
-
     }
   }
 }

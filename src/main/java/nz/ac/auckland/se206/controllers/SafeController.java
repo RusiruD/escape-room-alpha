@@ -31,7 +31,7 @@ public class SafeController {
   int z = 0;
 
   @FXML
-  public void GoBack(ActionEvent event) throws IOException {
+  public void goBack(ActionEvent event) throws IOException {
 
     Button button = (Button) event.getSource();
     Scene sceneButtonIsIn = button.getScene();

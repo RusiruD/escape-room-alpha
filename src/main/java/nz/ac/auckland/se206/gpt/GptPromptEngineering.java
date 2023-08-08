@@ -20,10 +20,9 @@ public class GptPromptEngineering {
         + " up, do not give the answer. You may accept close synonyms of the answer as correct. You"
         + " must also let the user know how many words are in the answer.";
   }
+
   public static String getRiddleWithGivenWord3(String wordToGuess) {
-    return "display the number"
-        + wordToGuess
-        + ". dont display any text/words just the number";
+    return "display the number" + wordToGuess + ". dont display any text/words just the number";
   }
 
   public static String getRiddleWithGivenWord1(String wordToGuess1) {
