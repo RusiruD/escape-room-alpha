@@ -13,9 +13,9 @@ import nz.ac.auckland.se206.controllers.SceneManagerAi.AppUi;
 /** Controller class for the room view. */
 public class SafeController {
   @FXML private Button btnGoBack;
-  @FXML private Button check;
+  @FXML private Button btnUnlockSafe;
 
-  @FXML private PasswordField pass;
+  @FXML private PasswordField passcode;
 
   /** Initializes the room view, it is called when the room loads. */
   public void initialize() {
@@ -23,9 +23,9 @@ public class SafeController {
   }
 
   @FXML
-  public void Pass() {
+  private void passcode() {
 
-    System.out.println(pass.getText());
+    System.out.println(passcode.getText());
   }
 
   @FXML
@@ -45,9 +45,9 @@ public class SafeController {
   }
 
   @FXML
-  public void Check() throws IOException {
+  private void checkPasscode() throws IOException {
 
-    String s = pass.getText();
+    String s = passcode.getText();
     if (s != null && s.equals("76942")) {
       System.out.println("passed");
       GameState.isSafeOpen = true;

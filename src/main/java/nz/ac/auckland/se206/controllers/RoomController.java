@@ -49,7 +49,7 @@ public class RoomController {
   }
 
   @FXML
-  public void ReturnToFirstRiddle(ActionEvent event) throws IOException {
+  private void returnToFirstRiddle(ActionEvent event) throws IOException {
     Button button = (Button) event.getSource();
     Scene sceneButtonIsIn = button.getScene();
     sceneButtonIsIn.setRoot(SceneManagerAi.getUiRoot(AppUi.FIRST_RIDDLE));
@@ -78,6 +78,24 @@ public class RoomController {
     alert.setHeaderText(headerText);
     alert.setContentText(message);
     alert.showAndWait();
+  }
+
+  public void clickWindow(MouseEvent event) throws IOException {
+    if (GameState.isRiddleResolved) {
+      System.out.println("door clicked");
+
+      if (!GameState.isKeyFound) {
+
+        showDialog("Info", "Find the key!", "");
+
+      } else {
+
+        showDialog("Info", "You Won!", "Good Job!");
+
+        btnYogaBall.setDisable(true);
+        btnYogaBall.setVisible(false);
+      }
+    }
   }
 
   /**
@@ -178,24 +196,6 @@ public class RoomController {
     sceneButtonIsIn.setRoot(SceneManagerAi.getUiRoot(AppUi.FIRST_RIDDLE));
   }
 
-  public void clickWindow(MouseEvent event) throws IOException {
-    if (GameState.isRiddleResolved) {
-      System.out.println("door clicked");
-
-      if (!GameState.isKeyFound) {
-
-        showDialog("Info", "Find the key!", "");
-
-      } else {
-
-        showDialog("Info", "You Won!", "Good Job!");
-
-        btnYogaBall.setDisable(true);
-        btnYogaBall.setVisible(false);
-      }
-    }
-  }
-
   /**
    * Handles the click event on the vase.
    *
@@ -219,7 +219,7 @@ public class RoomController {
   private int counter = 0;
 
   @FXML
-  private void boxingBagClicked(ActionEvent event) {
+  private void onBoxingBagClicked(ActionEvent event) {
     if (GameState.isRiddleResolved) {
       counter++;
       System.out.println("boxing bag clicked");
@@ -234,7 +234,7 @@ public class RoomController {
   }
 
   @FXML
-  private void clickTowels(MouseEvent event) {
+  private void onTowelsClicked(MouseEvent event) {
     System.out.println("Towels clicked");
   }
 
