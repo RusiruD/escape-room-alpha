@@ -50,7 +50,7 @@ public class SafeController {
   public void Check() throws IOException {
 
     String s = pass.getText();
-    if (s != null && s.equals("9423")) {
+    if (s != null && s.equals("943")) {
       System.out.println("passed");
       GameState.isSafeOpen = true;
 
