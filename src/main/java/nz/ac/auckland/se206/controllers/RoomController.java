@@ -49,16 +49,6 @@ public class RoomController {
    *
    * @param event the mouse event
    */
-  @FXML
-  private void clickWeight(MouseEvent event) {
-    System.out.println("weight clicked");
-  }
-
-  @FXML
-  public void clickWeight1(MouseEvent event) {
-    System.out.println("weight clicked");
-  }
-
   public void initialize() {
 
     btnReturnToFirstRiddle.setDisable(true);
@@ -68,7 +58,7 @@ public class RoomController {
   }
 
   @FXML
-  private void pickUpKey() {
+  private void onKeyClicked() {
     System.out.println("key picked up");
     key.setDisable(true);
     key.setVisible(false);
@@ -100,6 +90,16 @@ public class RoomController {
       Scene sceneButtonIsIn = button.getScene();
       sceneButtonIsIn.setRoot(SceneManagerAi.getUiRoot(AppUi.FOLDER));
     }
+  }
+
+  @FXML
+  private void clickWeight(MouseEvent event) {
+    System.out.println("weight clicked");
+  }
+
+  @FXML
+  public void clickWeight1(MouseEvent event) {
+    System.out.println("weight clicked");
   }
 
   @FXML
@@ -164,7 +164,7 @@ public class RoomController {
    * @throws IOException if there is an error loading the chat view
    */
   @FXML
-  private void start(ActionEvent event) throws IOException {
+  private void onStartGame(ActionEvent event) throws IOException {
     long startTime = System.currentTimeMillis();
     time.setProgress(0);
     textToSpeech = new TextToSpeech();

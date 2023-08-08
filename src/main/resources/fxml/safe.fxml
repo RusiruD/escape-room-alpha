@@ -6,8 +6,8 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.SafeController">
    <children>
-      <PasswordField fx:id="passcode" layoutX="176.0" layoutY="188.0" onAction="#passcode" promptText="Enter Passcode" />
-      <Button fx:id="btnUnlockSafe" layoutX="336.0" layoutY="188.0" mnemonicParsing="false" onAction="#checkPasscode" text="Unlock" />
-      <Button fx:id="btnGoBack" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#goBack" text="Back" />
+      <PasswordField fx:id="passcode" layoutX="176.0" layoutY="188.0" promptText="Enter Passcode" />
+      <Button fx:id="btnUnlockSafe" layoutX="336.0" layoutY="188.0" mnemonicParsing="false" onAction="#onPasscodeEntered" text="Unlock" />
+      <Button fx:id="btnGoBack" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#onBackButtonClicked" text="Back" />
    </children>
 </Pane>

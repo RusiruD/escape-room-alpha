@@ -23,13 +23,7 @@ public class SafeController {
   }
 
   @FXML
-  private void passcode() {
-
-    System.out.println(passcode.getText());
-  }
-
-  @FXML
-  private void goBack(ActionEvent event) throws IOException {
+  private void onBackButtonClicked(ActionEvent event) throws IOException {
 
     Button button = (Button) event.getSource();
     Scene sceneButtonIsIn = button.getScene();
@@ -45,7 +39,7 @@ public class SafeController {
   }
 
   @FXML
-  private void checkPasscode() throws IOException {
+  private void onPasscodeEntered() throws IOException {
 
     String s = passcode.getText();
     if (s != null && s.equals("76942")) {
