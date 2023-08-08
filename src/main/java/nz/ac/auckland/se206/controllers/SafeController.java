@@ -29,7 +29,7 @@ public class SafeController {
   }
 
   @FXML
-  public void goBack(ActionEvent event) throws IOException {
+  private void goBack(ActionEvent event) throws IOException {
 
     Button button = (Button) event.getSource();
     Scene sceneButtonIsIn = button.getScene();

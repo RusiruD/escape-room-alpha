@@ -43,13 +43,72 @@ public class RoomController {
    *
    * @param event the key event
    */
+
+  /**
+   * Handles the click event on the vase.
+   *
+   * @param event the mouse event
+   */
+  @FXML
+  private void clickWeight(MouseEvent event) {
+    System.out.println("weight clicked");
+  }
+
+  @FXML
+  public void clickWeight1(MouseEvent event) {
+    System.out.println("weight clicked");
+  }
+
+  public void initialize() {
+
+    btnReturnToFirstRiddle.setDisable(true);
+    btnReturnToFirstRiddle.setVisible(false);
+    // Initialization code goes here
+
+  }
+
+  @FXML
+  private void pickUpKey() {
+    System.out.println("key picked up");
+    key.setDisable(true);
+    key.setVisible(false);
+    GameState.isKeyFound = true;
+  }
+
+  /**
+   * Handles the click event on the window.
+   *
+   * @param event the mouse event
+   */
+  private int counter = 0;
+
+  @FXML
+  private void onTowelsClicked(MouseEvent event) {
+    System.out.println("Towels clicked");
+  }
+
+  @FXML
+  private void clickBottle(MouseEvent event) {
+    System.out.println("Bottle  clicked");
+  }
+
+  @FXML
+  private void onBallClicked(ActionEvent event) throws IOException {
+    System.out.println("yoga ball clicked");
+    if (GameState.isRiddleResolved) {
+      Button button = (Button) event.getSource();
+      Scene sceneButtonIsIn = button.getScene();
+      sceneButtonIsIn.setRoot(SceneManagerAi.getUiRoot(AppUi.FOLDER));
+    }
+  }
+
   @FXML
   private void onKeyPressed(KeyEvent event) {
     System.out.println("key " + event.getCode() + " pressed");
   }
 
   @FXML
-  private void returnToFirstRiddle(ActionEvent event) throws IOException {
+  private void onReturnToFirstRiddle(ActionEvent event) throws IOException {
     Button button = (Button) event.getSource();
     Scene sceneButtonIsIn = button.getScene();
     sceneButtonIsIn.setRoot(SceneManagerAi.getUiRoot(AppUi.FIRST_RIDDLE));
@@ -196,28 +255,6 @@ public class RoomController {
     sceneButtonIsIn.setRoot(SceneManagerAi.getUiRoot(AppUi.FIRST_RIDDLE));
   }
 
-  /**
-   * Handles the click event on the vase.
-   *
-   * @param event the mouse event
-   */
-  @FXML
-  private void clickWeight(MouseEvent event) {
-    System.out.println("weight clicked");
-  }
-
-  @FXML
-  public void clickWeight1(MouseEvent event) {
-    System.out.println("weight clicked");
-  }
-
-  /**
-   * Handles the click event on the window.
-   *
-   * @param event the mouse event
-   */
-  private int counter = 0;
-
   @FXML
   private void onBoxingBagClicked(ActionEvent event) {
     if (GameState.isRiddleResolved) {
@@ -234,27 +271,7 @@ public class RoomController {
   }
 
   @FXML
-  private void onTowelsClicked(MouseEvent event) {
-    System.out.println("Towels clicked");
-  }
-
-  @FXML
-  private void clickBottle(MouseEvent event) {
-    System.out.println("Bottle  clicked");
-  }
-
-  @FXML
-  private void ballClicked(ActionEvent event) throws IOException {
-    System.out.println("yoga ball clicked");
-    if (GameState.isRiddleResolved) {
-      Button button = (Button) event.getSource();
-      Scene sceneButtonIsIn = button.getScene();
-      sceneButtonIsIn.setRoot(SceneManagerAi.getUiRoot(AppUi.FOLDER));
-    }
-  }
-
-  @FXML
-  private void goToSafe(ActionEvent event) throws IOException {
+  private void onSafeClicked(ActionEvent event) throws IOException {
     System.out.println("safe clicked");
     if (GameState.isRiddleResolved) {
       if (!GameState.isSafeOpen) {
@@ -268,21 +285,5 @@ public class RoomController {
         key.setDisable(false);
       }
     }
-  }
-
-  public void initialize() {
-
-    btnReturnToFirstRiddle.setDisable(true);
-    btnReturnToFirstRiddle.setVisible(false);
-    // Initialization code goes here
-
-  }
-
-  @FXML
-  private void pickUpKey() {
-    System.out.println("key picked up");
-    key.setDisable(true);
-    key.setVisible(false);
-    GameState.isKeyFound = true;
   }
 }
