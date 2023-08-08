@@ -49,21 +49,6 @@ public class RoomController {
    *
    * @param event the mouse event
    */
-  public void initialize() {
-
-    btnReturnToFirstRiddle.setDisable(true);
-    btnReturnToFirstRiddle.setVisible(false);
-    // Initialization code goes here
-
-  }
-
-  @FXML
-  private void onKeyClicked() {
-    System.out.println("key picked up");
-    key.setDisable(true);
-    key.setVisible(false);
-    GameState.isKeyFound = true;
-  }
 
   /**
    * Handles the click event on the window.
@@ -80,6 +65,22 @@ public class RoomController {
   @FXML
   private void clickBottle(MouseEvent event) {
     System.out.println("Bottle  clicked");
+  }
+
+  public void initialize() {
+
+    btnReturnToFirstRiddle.setDisable(true);
+    btnReturnToFirstRiddle.setVisible(false);
+    // Initialization code goes here
+
+  }
+
+  @FXML
+  private void onKeyClicked() {
+    System.out.println("key picked up");
+    key.setDisable(true);
+    key.setVisible(false);
+    GameState.isKeyFound = true;
   }
 
   @FXML
@@ -165,10 +166,12 @@ public class RoomController {
    */
   @FXML
   private void onStartGame(ActionEvent event) throws IOException {
+    // the time the instant game is started is measured
     long startTime = System.currentTimeMillis();
+    // the progress indicator is set to 0
     time.setProgress(0);
     textToSpeech = new TextToSpeech();
-
+    // text to speech warnings for 2 minutes,1minute and 30 seconds are created in threads
     Task<Void> twoMinutes =
         new Task<Void>() {
 
@@ -203,6 +206,7 @@ public class RoomController {
           }
         };
 
+    // a timer is created that runs a task every second in a background thread
     Timer myTimer = new Timer();
     myTimer.scheduleAtFixedRate(
         new TimerTask() {
@@ -210,6 +214,7 @@ public class RoomController {
 
           @Override
           public void run() {
+            // if the game is active and the timer reaches 120 seconds the game ends
             if (GameState.isGameActive == true) {
               if (seconds == 120) {
                 Platform.exit();
@@ -220,10 +225,14 @@ public class RoomController {
                 System.out.println(" took " + time + "ms");
                 System.out.println("endrld");
               }
+              // if the game is active and the timer reaches 60 seconds a 1 minute text to speech
+              // warning is spoken
               if (seconds == 60) {
                 Thread reminder2 = new Thread(oneMinute, "Search Thread");
                 reminder2.start();
               }
+              // if the game is active and the timer reaches 90 seconds a 30 seconds text to speech
+              // warning is spoken
               if (seconds == 90) {
                 Thread reminder3 = new Thread(thirtySeconds, "Search Thread");
                 reminder3.start();
@@ -237,7 +246,7 @@ public class RoomController {
         },
         0,
         1000);
-
+    // once the start button is pressed all buttons stop being disabled and most become visible
     btnGoToSafe.setDisable(false);
     boxingBag.setDisable(false);
     boxingBag.setVisible(true);
@@ -250,6 +259,7 @@ public class RoomController {
     btnReturnToFirstRiddle.setDisable(false);
     btnReturnToFirstRiddle.setVisible(true);
 
+    // the scene is changed to the first riddle when the start button is pressed
     Button button = (Button) event.getSource();
     Scene sceneButtonIsIn = button.getScene();
     sceneButtonIsIn.setRoot(SceneManagerAi.getUiRoot(AppUi.FIRST_RIDDLE));

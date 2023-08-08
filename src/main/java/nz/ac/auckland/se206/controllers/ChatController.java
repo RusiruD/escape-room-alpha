@@ -99,6 +99,8 @@ public class ChatController {
   @FXML
   private void onSendMessage(ActionEvent event) throws ApiProxyException, IOException {
     TextToSpeech textToSpeech = new TextToSpeech();
+
+    // creates a task that causes a message to be spoken
     Task<Void> rightAnswer =
         new Task<Void>() {
 
@@ -120,10 +122,14 @@ public class ChatController {
           }
         };
 
+    // once a possible answer is sent to gpt, the send and go back button are disabled and the
+    // progress indicator is shown
     sendButton.setDisable(true);
     back.setDisable(true);
     indicator.setVisible(true);
     String message = inputText.getText();
+    // if there was no text entered, the progress indicator is hidden and the send and go back
+    // button are enabled
     if (message.trim().isEmpty()) {
       indicator.setVisible(false);
       sendButton.setDisable(false);
@@ -144,13 +150,17 @@ public class ChatController {
             indicator.setVisible(false);
             sendButton.setDisable(false);
             back.setDisable(false);
+            // if the last message is from the assistant and starts with "Correct" the riddle is
+            // resolved
             if (lastMsg.getRole().equals("assistant")
                 && lastMsg.getContent().startsWith("Correct")) {
               Thread correct = new Thread(rightAnswer, "correct thread");
+              // the words "good guess you got it right" are spoken
               correct.start();
               GameState.isRiddleResolved = true;
-              System.out.println(GameState.isRiddleResolved);
+
             } else {
+              // the words "wrong guess try again" are spoken
               Thread wrong = new Thread(wrongAnswer, "wrong thread");
               wrong.start();
             }
