@@ -25,12 +25,13 @@ public class RoomController {
   @FXML private Button btnGoToSafe;
 
   @FXML private Rectangle bottle;
-  @FXML protected Button bench;
+  @FXML protected Button btnYogaBall;
 
   @FXML private Button key;
 
   @FXML private Button boxingbag;
   @FXML private Rectangle weight1;
+  @FXML private Rectangle towels;
   @FXML private Rectangle weight2;
   @FXML private ProgressIndicator time;
   @FXML private Button btnReturnToFirstRiddle;
@@ -195,7 +196,7 @@ public class RoomController {
     btnStart.setDisable(true);
     btnStart.setVisible(false);
     bottle.setDisable(false);
-    bench.setDisable(false);
+    btnYogaBall.setDisable(false);
     // bench.setVisible(true);
     btnReturnToFirstRiddle.setDisable(false);
     btnReturnToFirstRiddle.setVisible(true);
@@ -227,11 +228,8 @@ public class RoomController {
 
         showDialog("Info", "You Won!", "Good Job!");
 
-        bench.setDisable(true);
-        bench.setVisible(false);
-
-        bench.setDisable(true);
-        bench.setVisible(false);
+        btnYogaBall.setDisable(true);
+        btnYogaBall.setVisible(false);
       }
     }
   }
@@ -281,8 +279,8 @@ public class RoomController {
   }
 
   @FXML
-  public void benchClicked(ActionEvent event) throws IOException {
-    System.out.println("bench clicked");
+  public void ballClicked(ActionEvent event) throws IOException {
+    System.out.println("yoga ball clicked");
     if (GameState.isRiddleResolved) {
       Button button = (Button) event.getSource();
       Scene sceneButtonIsIn = button.getScene();
