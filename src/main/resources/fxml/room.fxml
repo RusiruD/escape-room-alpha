@@ -21,13 +21,13 @@
             <Font name="Arial" size="35.0" />
          </font>
       </Label>
-      <Rectangle fx:id="weight" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="69.0" layoutX="230.0" layoutY="276.0" onMouseClicked="#clickWeight" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="94.0" />
-      <Rectangle fx:id="poster" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="52.0" layoutX="160.0" layoutY="99.0" onMouseClicked="#clickPoster" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="94.0" />
-      <Rectangle fx:id="ball" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="52.0" layoutX="210.0" layoutY="165.0" onMouseClicked="#clickDoor" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="26.0" />
+      <Rectangle fx:id="weight2" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="69.0" layoutX="230.0" layoutY="276.0" onMouseClicked="#clickWeight" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="94.0" />
+      <Rectangle fx:id="towels" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="52.0" layoutX="170.0" layoutY="99.0" onMouseClicked="#clickTowels" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="84.0" />
+      <Rectangle fx:id="bottle" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="52.0" layoutX="210.0" layoutY="165.0" onMouseClicked="#clickDoor" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="26.0" />
       <Rectangle fx:id="weight1" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="41.0" layoutX="333.0" layoutY="333.0" onMouseClicked="#clickWeight1" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="71.0" />
       <Button fx:id="btnStart" layoutX="268.0" layoutY="242.0" mnemonicParsing="false" onAction="#Start" text="Start Game" />
       <Button fx:id="bench" disable="true" layoutX="104.0" layoutY="312.0" mnemonicParsing="false" onAction="#benchClicked" opacity="0.0" prefHeight="105.0" prefWidth="132.0" text="bench" />
-      <Button fx:id="clock" layoutX="94.0" layoutY="129.0" mnemonicParsing="false" onAction="#clockClicked" opacity="0.0" prefHeight="175.0" prefWidth="51.0" text="Clock" />
+      <Button fx:id="boxingbag" layoutX="94.0" layoutY="129.0" mnemonicParsing="false" onAction="#boxingbagclicked" opacity="0.0" prefHeight="175.0" prefWidth="51.0" text="Clock" />
       <ProgressIndicator fx:id="time" layoutX="63.0" layoutY="69.0" prefHeight="52.0" prefWidth="32.0" progress="0.0" />
       <Button fx:id="btnReturnToFirstRiddle" layoutX="489.0" layoutY="419.0" mnemonicParsing="false" onAction="#ReturnToFirstRiddle" text="1st riddle" />
       <ImageView blendMode="DARKEN" fitHeight="78.0" fitWidth="94.0" layoutX="268.0" layoutY="365.0">

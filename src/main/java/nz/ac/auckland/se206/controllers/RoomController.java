@@ -24,15 +24,14 @@ public class RoomController {
   @FXML private Button btnStart;
   @FXML private Button btnGoToSafe;
 
-  @FXML private Rectangle ball;
+  @FXML private Rectangle bottle;
   @FXML protected Button bench;
 
-  @FXML private Rectangle window;
-  @FXML private Rectangle vase;
   @FXML private Button key;
 
-  @FXML private Button clock;
+  @FXML private Button boxingbag;
   @FXML private Rectangle weight1;
+  @FXML private Rectangle weight2;
   @FXML private ProgressIndicator time;
   @FXML private Button btnReturnToFirstRiddle;
 
@@ -191,16 +190,15 @@ public class RoomController {
     120000);*/
 
     btnGoToSafe.setDisable(false);
-    clock.setDisable(false);
-    clock.setVisible(true);
+    boxingbag.setDisable(false);
+    boxingbag.setVisible(true);
     btnStart.setDisable(true);
     btnStart.setVisible(false);
-    ball.setDisable(false);
+    bottle.setDisable(false);
     bench.setDisable(false);
     // bench.setVisible(true);
     btnReturnToFirstRiddle.setDisable(false);
     btnReturnToFirstRiddle.setVisible(true);
-    clock.setDisable(false);
 
     Button button = (Button) event.getSource();
     Scene sceneButtonIsIn = button.getScene();
@@ -261,10 +259,10 @@ public class RoomController {
   int x = 0;
 
   @FXML
-  public void clockClicked(ActionEvent event) {
+  public void boxingbagclicked(ActionEvent event) {
     if (GameState.isRiddleResolved) {
       x++;
-      System.out.println("clock clicked");
+      System.out.println("boxing bag clicked");
       if (x == 3) {
         x = 0;
         // showDialog("Info", "You Lost!", "You broke the window!");
@@ -278,8 +276,8 @@ public class RoomController {
   }
 
   @FXML
-  public void clickPoster(MouseEvent event) {
-    System.out.println("poster clicked");
+  public void clickTowels(MouseEvent event) {
+    System.out.println("Towels clicked");
   }
 
   @FXML
