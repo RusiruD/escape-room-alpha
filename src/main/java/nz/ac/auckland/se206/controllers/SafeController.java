@@ -28,8 +28,6 @@ public class SafeController {
     System.out.println(pass.getText());
   }
 
-  int z = 0;
-
   @FXML
   public void goBack(ActionEvent event) throws IOException {
 

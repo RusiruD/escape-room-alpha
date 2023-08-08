@@ -36,7 +36,7 @@ public class ChatController {
    * @throws ApiProxyException if there is an error communicating with the API proxy
    */
   @FXML
-  public void initialize() throws ApiProxyException {
+  private void initialize() throws ApiProxyException {
     chatCompletionRequest =
         new ChatCompletionRequest().setN(1).setTemperature(0.2).setTopP(0.5).setMaxTokens(100);
     runGpt(new ChatMessage("user", GptPromptEngineering.getRiddleWithGivenWord("yoga ball")));

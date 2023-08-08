@@ -44,7 +44,7 @@ public class RoomController {
    * @param event the key event
    */
   @FXML
-  public void onKeyPressed(KeyEvent event) {
+  private void onKeyPressed(KeyEvent event) {
     System.out.println("key " + event.getCode() + " pressed");
   }
 
@@ -87,7 +87,7 @@ public class RoomController {
    * @throws IOException if there is an error loading the chat view
    */
   @FXML
-  public void start(ActionEvent event) throws IOException {
+  private void start(ActionEvent event) throws IOException {
     long startTime = System.currentTimeMillis();
     time.setProgress(0);
     textToSpeech = new TextToSpeech();
@@ -129,12 +129,12 @@ public class RoomController {
     Timer myTimer = new Timer();
     myTimer.scheduleAtFixedRate(
         new TimerTask() {
-          double i = 0;
+          private double seconds = 0;
 
           @Override
           public void run() {
             if (GameState.isGameActive == true) {
-              if (i == 120) {
+              if (seconds == 120) {
                 Platform.exit();
                 myTimer.cancel();
 
@@ -143,18 +143,18 @@ public class RoomController {
                 System.out.println(" took " + time + "ms");
                 System.out.println("endrld");
               }
-              if (i == 60) {
+              if (seconds == 60) {
                 Thread reminder2 = new Thread(oneMinute, "Search Thread");
                 reminder2.start();
               }
-              if (i == 90) {
+              if (seconds == 90) {
                 Thread reminder3 = new Thread(thirtySeconds, "Search Thread");
                 reminder3.start();
               }
-              System.out.println(i);
+              System.out.println(seconds);
 
-              time.setProgress(i / 120);
-              i++;
+              time.setProgress(seconds / 120);
+              seconds++;
             }
           }
         },
@@ -202,7 +202,7 @@ public class RoomController {
    * @param event the mouse event
    */
   @FXML
-  public void clickWeight(MouseEvent event) {
+  private void clickWeight(MouseEvent event) {
     System.out.println("weight clicked");
   }
 
@@ -216,15 +216,15 @@ public class RoomController {
    *
    * @param event the mouse event
    */
-  int x = 0;
+  private int counter = 0;
 
   @FXML
-  public void boxingBagClicked(ActionEvent event) {
+  private void boxingBagClicked(ActionEvent event) {
     if (GameState.isRiddleResolved) {
-      x++;
+      counter++;
       System.out.println("boxing bag clicked");
-      if (x == 3) {
-        x = 0;
+      if (counter == 3) {
+        counter = 0;
 
         Button button = (Button) event.getSource();
         Scene sceneButtonIsIn = button.getScene();
@@ -234,17 +234,17 @@ public class RoomController {
   }
 
   @FXML
-  public void clickTowels(MouseEvent event) {
+  private void clickTowels(MouseEvent event) {
     System.out.println("Towels clicked");
   }
 
   @FXML
-  public void clickBottle(MouseEvent event) {
+  private void clickBottle(MouseEvent event) {
     System.out.println("Bottle  clicked");
   }
 
   @FXML
-  public void ballClicked(ActionEvent event) throws IOException {
+  private void ballClicked(ActionEvent event) throws IOException {
     System.out.println("yoga ball clicked");
     if (GameState.isRiddleResolved) {
       Button button = (Button) event.getSource();
@@ -254,7 +254,7 @@ public class RoomController {
   }
 
   @FXML
-  public void goToSafe(ActionEvent event) throws IOException {
+  private void goToSafe(ActionEvent event) throws IOException {
     System.out.println("safe clicked");
     if (GameState.isRiddleResolved) {
       if (!GameState.isSafeOpen) {
@@ -279,7 +279,7 @@ public class RoomController {
   }
 
   @FXML
-  public void pickUpKey() {
+  private void pickUpKey() {
     System.out.println("key picked up");
     key.setDisable(true);
     key.setVisible(false);
