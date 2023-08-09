@@ -205,17 +205,30 @@ public class RoomController {
    */
   @FXML
   private void onStartGame(ActionEvent event) throws IOException {
+    /* */
     // the time the instant game is started is measured
     long startTime = System.currentTimeMillis();
     // the progress indicator is set to 0
     time.setProgress(0);
 
     time.setVisible(true);
+    // Platform.runLater(
+    // () -> {
+    Task<Void> ds =
+        new Task<Void>() {
 
-    textToSpeech = new TextToSpeech();
+          @Override
+          protected Void call() throws Exception {
+
+            textToSpeech = new TextToSpeech();
+            return null;
+          }
+        };
+    Thread ds1 = new Thread(ds, "Search Thread");
+    ds1.start();
+
     // text to speech warnings for 2 minutes,1minute and 30 seconds are created in threads
-    Platform.runLater(() -> {});
-
+    // });
     Task<Void> twoMinutes =
         new Task<Void>() {
 
@@ -228,6 +241,7 @@ public class RoomController {
         };
     Thread reminder1 = new Thread(twoMinutes, "Search Thread");
     reminder1.start();
+
     Task<Void> oneMinute =
         new Task<Void>() {
 
@@ -264,6 +278,7 @@ public class RoomController {
     // a timer is created that runs a task every second in a background thread
 
     Timer myTimer = new Timer();
+
     myTimer.scheduleAtFixedRate(
         new TimerTask() {
           private double seconds = 0;
