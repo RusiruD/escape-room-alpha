@@ -1,9 +1,9 @@
-
 package nz.ac.auckland.se206.ball;
 
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
 import javafx.util.Duration;
@@ -27,15 +27,18 @@ public class BouncingBallPane extends Pane {
   }
 
   private void move(Circle ball) {
-    ball.setLayoutX(ball.getLayoutX() + xSpeed);
-    ball.setLayoutY(ball.getLayoutY() + ySpeed);
 
-    if (ball.getLayoutX() > getWidth() || ball.getLayoutX() < 0) {
-      xSpeed *= -1;
-    }
-    if (ball.getLayoutY() > getHeight() || ball.getLayoutY() < 0) {
-      ySpeed *= -1;
-    }
+    Platform.runLater(
+        () -> {
+          ball.setLayoutX(ball.getLayoutX() + xSpeed);
+          ball.setLayoutY(ball.getLayoutY() + ySpeed);
+
+          if (ball.getLayoutX() > getWidth() || ball.getLayoutX() < 0) {
+            xSpeed *= -1;
+          }
+          if (ball.getLayoutY() > getHeight() || ball.getLayoutY() < 0) {
+            ySpeed *= -1;
+          }
+        });
   }
-
 }

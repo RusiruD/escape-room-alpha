@@ -214,6 +214,8 @@ public class RoomController {
 
     textToSpeech = new TextToSpeech();
     // text to speech warnings for 2 minutes,1minute and 30 seconds are created in threads
+    Platform.runLater(() -> {});
+
     Task<Void> twoMinutes =
         new Task<Void>() {
 
@@ -233,6 +235,7 @@ public class RoomController {
           protected Void call() throws Exception {
 
             textToSpeech.speak("You have 1 minute remaining", "to escape the gym");
+
             return null;
           }
         };
@@ -259,6 +262,7 @@ public class RoomController {
         };
 
     // a timer is created that runs a task every second in a background thread
+
     Timer myTimer = new Timer();
     myTimer.scheduleAtFixedRate(
         new TimerTask() {
@@ -268,58 +272,19 @@ public class RoomController {
           public void run() {
             // if the game is active and the timer reaches 120 seconds the game ends
             if (GameState.isGameActive == true) {
-              if (seconds == 120) {
-                if (GameState.isGameWon == false) {
-                  Thread lost = new Thread(youLost, "Search Thread");
-                  lost.start();
-                }
-                Platform.exit();
-                myTimer.cancel();
-
-                long time = System.currentTimeMillis() - startTime;
-
-                System.out.println(" took " + time + "ms");
-                System.out.println("endrld");
-              }
-              // if the game is active and the timer reaches 60 seconds a 1 minute text to speech
-              // warning is spoken
-              if (seconds == 60) {
-                Thread reminder2 = new Thread(oneMinute, "Search Thread");
-                reminder2.start();
-              }
-              // if the game is active and the timer reaches 90 seconds a 30 seconds text to speech
-              // warning is spoken
-              if (seconds == 90) {
-                Thread reminder3 = new Thread(thirtySeconds, "Search Thread");
-                reminder3.start();
-              }
-              System.out.println(seconds);
-
-              time.setProgress(seconds / 120);
+              timerMethod(seconds, startTime, myTimer, oneMinute, thirtySeconds, youLost);
               seconds++;
             }
           }
         },
         0,
         1000);
-    // once the start button is pressed all buttons stop being disabled and most become visible
-    btnGoToSafe.setDisable(false);
-    boxingBag.setDisable(false);
-    boxingBag.setVisible(true);
-    btnStart.setDisable(true);
-    btnStart.setVisible(false);
-    bottle.setDisable(false);
-    window.setDisable(false);
-    btnCalendar.setDisable(false);
-    btnYogaBall.setDisable(false);
-
-    btnReturnToFirstRiddle.setDisable(false);
-    btnReturnToFirstRiddle.setVisible(true);
-
-    // the scene is changed to the first riddle when the start button is pressed
+    enableAllButtons();
     Button button = (Button) event.getSource();
     Scene sceneButtonIsIn = button.getScene();
     sceneButtonIsIn.setRoot(SceneManagerAi.getUiRoot(AppUi.FIRST_RIDDLE));
+    // the scene is changed to the first riddle when the start button is pressed
+
   }
 
   @FXML
@@ -352,5 +317,55 @@ public class RoomController {
         key.setDisable(false);
       }
     }
+  }
+
+  public void timerMethod(
+      double seconds,
+      long startTime,
+      Timer myTimer,
+      Task<Void> oneMinute,
+      Task<Void> thirtySeconds,
+      Task<Void> youLost) {
+    if (seconds == 120) {
+      if (GameState.isGameWon == false) {
+        Thread lost = new Thread(youLost, "lost Thread");
+        lost.start();
+      }
+      Platform.exit();
+      long time = System.currentTimeMillis() - startTime;
+      myTimer.cancel();
+
+      System.out.println(" took " + time + "ms");
+    }
+    // if the game is active and the timer reaches 60 seconds a 1 minute text to speech
+    // warning is spoken
+    if (seconds == 60) {
+      Thread reminder2 = new Thread(oneMinute, "minute Thread");
+
+      reminder2.start();
+    }
+    // if the game is active and the timer reaches 90 seconds a 30 seconds text to speech
+    // warning is spoken
+    if (seconds == 90) {
+      Thread reminder3 = new Thread(thirtySeconds, "30 seconds Thread");
+      reminder3.start();
+    }
+
+    time.setProgress(seconds / 120);
+  }
+
+  public void enableAllButtons() {
+    btnGoToSafe.setDisable(false);
+    boxingBag.setDisable(false);
+    // boxingBag.setVisible(true);
+    btnStart.setDisable(true);
+    btnStart.setVisible(false);
+    bottle.setDisable(false);
+    window.setDisable(false);
+    btnCalendar.setDisable(false);
+    btnYogaBall.setDisable(false);
+
+    btnReturnToFirstRiddle.setDisable(false);
+    btnReturnToFirstRiddle.setVisible(true);
   }
 }
