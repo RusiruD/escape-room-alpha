@@ -3,6 +3,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ProgressIndicator?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
@@ -11,13 +12,8 @@
 <?import javafx.scene.text.Font?>
 <?import nz.ac.auckland.se206.ball.BouncingBallPane?>
 
-<Pane fx:id="room" centerShape="false" focusTraversable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="487.0" minWidth="745.0" onKeyPressed="#onKeyPressed" onKeyReleased="#onKeyReleased" prefHeight="487.0" prefWidth="745.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.RoomController">
+<Pane fx:id="room" centerShape="false" focusTraversable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="487.0" minWidth="745.0" onKeyPressed="#onKeyPressed" onKeyReleased="#onKeyReleased" prefHeight="487.0" prefWidth="745.0" stylesheets="@../css/escapeRoom.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.RoomController">
    <children>
-      <ImageView blendMode="DARKEN" fitHeight="378.0" fitWidth="159.0" layoutX="547.0" layoutY="65.0">
-         <image>
-            <Image url="@../images/exit-door-publicdomain.jpg" />
-         </image>
-      </ImageView>
       <ImageView fitHeight="378.0" fitWidth="494.0" layoutX="59.0" layoutY="65.0">
          <image>
             <Image url="@../images/scene.jpg" />
@@ -32,18 +28,18 @@
       <Rectangle fx:id="towels" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="52.0" layoutX="170.0" layoutY="99.0" onMouseClicked="#onTowelsClicked" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="84.0" />
       <Rectangle fx:id="bottle" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="52.0" layoutX="210.0" layoutY="165.0" onMouseClicked="#clickBottle" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="26.0" />
       <Rectangle fx:id="weight1" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="41.0" layoutX="333.0" layoutY="333.0" onMouseClicked="#clickWeight1" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="71.0" />
-      <Rectangle fx:id="window" arcHeight="5.0" arcWidth="5.0" disable="true" fill="#1f93ff" focusTraversable="true" height="166.0" layoutX="265.0" layoutY="148.0" onMouseClicked="#clickWindow" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="159.0" />
+      <Rectangle fx:id="window" arcHeight="5.0" arcWidth="5.0" disable="true" fill="#77c0ff" focusTraversable="true" height="166.0" layoutX="266.0" layoutY="149.0" onMouseClicked="#onWindowClicked" opacity="0.49" stroke="BLACK" strokeType="INSIDE" width="159.0" />
       <Button fx:id="btnStart" layoutX="268.0" layoutY="242.0" mnemonicParsing="false" onAction="#onStartGame" text="Start Game" />
       <Button fx:id="btnYogaBall" disable="true" layoutX="104.0" layoutY="312.0" mnemonicParsing="false" onAction="#onBallClicked" opacity="0.0" prefHeight="105.0" prefWidth="132.0" text="Yoga Ball" />
       <Button fx:id="boxingBag" layoutX="94.0" layoutY="129.0" mnemonicParsing="false" onAction="#onBoxingBagClicked" opacity="0.0" prefHeight="175.0" prefWidth="51.0" text="Boxing Bag" />
       <ProgressIndicator fx:id="time" layoutX="63.0" layoutY="69.0" prefHeight="52.0" prefWidth="32.0" progress="0.0" />
-      <Button fx:id="btnReturnToFirstRiddle" layoutX="483.0" layoutY="419.0" mnemonicParsing="false" onAction="#onReturnToFirstRiddle" prefHeight="25.0" prefWidth="71.0" text="1st riddle" />
-      <ImageView blendMode="DARKEN" fitHeight="78.0" fitWidth="94.0" layoutX="268.0" layoutY="365.0">
+      <Button fx:id="btnReturnToFirstRiddle" layoutX="59.0" layoutY="418.0" mnemonicParsing="false" onAction="#onReturnToFirstRiddle" prefHeight="25.0" prefWidth="71.0" text="1st riddle" />
+      <ImageView blendMode="DARKEN" fitHeight="69.0" fitWidth="84.0" layoutX="268.0" layoutY="374.0">
          <image>
             <Image url="@../images/icon-seif_generated.jpg" />
          </image>
       </ImageView>
-      <Button fx:id="btnGoToSafe" disable="true" layoutX="279.0" layoutY="373.0" mnemonicParsing="false" onAction="#onSafeClicked" opacity="0.0" prefHeight="69.0" prefWidth="75.0" text="safe" />
+      <Button fx:id="btnGoToSafe" disable="true" layoutX="271.0" layoutY="373.0" mnemonicParsing="false" onAction="#onSafeClicked" opacity="0.0" prefHeight="69.0" prefWidth="83.0" text="safe" />
       <Button fx:id="key" layoutX="281.0" layoutY="378.0" mnemonicParsing="false" onAction="#onKeyClicked" prefHeight="41.0" prefWidth="65.0" text="key" visible="false">
          <graphic>
             <ImageView fitHeight="44.0" fitWidth="61.0" pickOnBounds="true" preserveRatio="true">
@@ -52,11 +48,28 @@
                </image>
             </ImageView>
          </graphic></Button>
-      <VBox layoutX="7.0" layoutY="395.0" prefHeight="69.0" prefWidth="45.0">
+      <VBox layoutX="59.0" layoutY="453.0" prefHeight="17.0" prefWidth="654.0">
          <children>
             <BouncingBallPane />
          </children>
       </VBox>
       <Rectangle fx:id="door" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="378.0" layoutX="554.0" layoutY="67.0" onMouseClicked="#onDoorClicked" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="151.0" />
+      <ImageView fitHeight="378.0" fitWidth="159.0" layoutX="546.0" layoutY="65.0">
+         <image>
+            <Image url="@../images/exit-door-publicdomain.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="62.0" fitWidth="83.0" layoutX="438.0" layoutY="68.0">
+         <image>
+            <Image url="@../images/calendar.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="btnCalendar" disable="true" layoutX="438.0" layoutY="72.0" mnemonicParsing="false" onAction="#onCalendarClicked" opacity="0.0" prefHeight="62.0" prefWidth="83.0" text="calendar button" />
+      <Separator fx:id="seperatorOne" blendMode="DARKEN" layoutX="275.0" layoutY="183.0" prefHeight="17.0" prefWidth="123.0" rotate="-36.0" visible="false" />
+      <Separator fx:id="seperatorTwo" layoutX="279.0" layoutY="215.0" prefHeight="1.0" prefWidth="123.0" rotate="24.4" visible="false" />
+      <Separator fx:id="seperatorThree" layoutX="274.0" layoutY="214.0" prefHeight="0.0" prefWidth="142.0" rotate="-12.5" visible="false" />
+      <Separator fx:id="seperatorFour" layoutX="370.0" layoutY="164.0" orientation="VERTICAL" prefHeight="105.0" prefWidth="16.0" rotate="-129.8" visible="false" />
+      <Separator fx:id="seperatorFive" layoutX="300.0" layoutY="212.0" prefHeight="17.0" prefWidth="91.0" rotate="-110.6" visible="false" />
+      <Separator fx:id="seperatorSix" layoutX="276.0" layoutY="219.0" prefHeight="17.0" prefWidth="113.0" rotate="135.0" visible="false" />
    </children>
 </Pane>

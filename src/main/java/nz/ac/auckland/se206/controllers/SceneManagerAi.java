@@ -10,7 +10,8 @@ public class SceneManagerAi {
     SECOND_RIDDLE,
     SAFE,
     FOLDER,
-    PASSCODEHINT
+    PASSCODEHINT,
+    CALENDAR
   }
 
   private static HashMap<AppUi, Parent> sceneMap = new HashMap<AppUi, Parent>();

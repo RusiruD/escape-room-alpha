@@ -48,6 +48,7 @@ public class App extends Application {
   public void start(final Stage stage) throws IOException {
     SceneManagerAi.addUi(AppUi.ESCAPE_ROOM, loadFxml("room"));
     SceneManagerAi.addUi(AppUi.FIRST_RIDDLE, loadFxml("firstRiddle"));
+    SceneManagerAi.addUi(AppUi.CALENDAR, loadFxml("calendar"));
     SceneManagerAi.addUi(AppUi.SAFE, loadFxml("safe"));
     SceneManagerAi.addUi(AppUi.FOLDER, loadFxml("secondRiddle"));
     SceneManagerAi.addUi(AppUi.PASSCODEHINT, loadFxml("thirdRiddle"));

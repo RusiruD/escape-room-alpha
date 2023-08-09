@@ -11,6 +11,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ProgressIndicator;
+import javafx.scene.control.Separator;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Rectangle;
@@ -23,7 +24,7 @@ public class RoomController {
   private TextToSpeech textToSpeech;
   @FXML private Button btnStart;
   @FXML private Button btnGoToSafe;
-
+  @FXML private Button btnCalendar;
   @FXML private Rectangle bottle;
   @FXML protected Button btnYogaBall;
 
@@ -36,6 +37,14 @@ public class RoomController {
   @FXML private Rectangle door;
   @FXML private ProgressIndicator time;
   @FXML private Button btnReturnToFirstRiddle;
+  @FXML private Separator seperatorOne;
+  @FXML private Separator seperatorTwo;
+
+  @FXML private Separator seperatorThree;
+
+  @FXML private Separator seperatorFour;
+
+  @FXML private Separator seperatorFive;
 
   /** Initializes the room view, it is called when the room loads. */
 
@@ -56,7 +65,9 @@ public class RoomController {
    *
    * @param event the mouse event
    */
-  private int counter = 0;
+  private int boxingBagCounter = 0;
+
+  private int windowCounter = 0;
 
   @FXML
   private void onTowelsClicked(MouseEvent event) {
@@ -78,11 +89,30 @@ public class RoomController {
 
   @FXML
   private void onDoorClicked() {
+    door.hoverProperty()
+        .addListener(
+            l -> {
+              System.out.println("door is being hovered");
+            });
     if (GameState.isKeyFound) {
       showDialog("Info", "You have escaped", "You have escaped the gym, congratulations!");
       GameState.isGameWon = true;
     } else {
       showDialog("Info", "The door is locked", "You have to find the key to escape");
+    }
+  }
+
+  @FXML
+  private void onWindowClicked() throws IOException {
+    System.out.println("window clicked");
+    windowCounter++;
+    if (windowCounter == 3) {
+      seperatorThree.setVisible(true);
+      seperatorTwo.setVisible(true);
+      seperatorOne.setVisible(true);
+    } else if (windowCounter > 3) {
+      seperatorFive.setVisible(true);
+      seperatorFour.setVisible(true);
     }
   }
 
@@ -101,6 +131,12 @@ public class RoomController {
       Button button = (Button) event.getSource();
       Scene sceneButtonIsIn = button.getScene();
       sceneButtonIsIn.setRoot(SceneManagerAi.getUiRoot(AppUi.FOLDER));
+      btnYogaBall
+          .hoverProperty()
+          .addListener(
+              l -> {
+                System.out.println("Button is being hovered");
+              });
     }
   }
 
@@ -124,6 +160,14 @@ public class RoomController {
     Button button = (Button) event.getSource();
     Scene sceneButtonIsIn = button.getScene();
     sceneButtonIsIn.setRoot(SceneManagerAi.getUiRoot(AppUi.FIRST_RIDDLE));
+  }
+
+  @FXML
+  private void onCalendarClicked(ActionEvent event) throws IOException {
+    System.out.println("Calendar clicked");
+    Button button = (Button) event.getSource();
+    Scene sceneButtonIsIn = button.getScene();
+    sceneButtonIsIn.setRoot(SceneManagerAi.getUiRoot(AppUi.CALENDAR));
   }
 
   /**
@@ -266,6 +310,7 @@ public class RoomController {
     btnStart.setVisible(false);
     bottle.setDisable(false);
     window.setDisable(false);
+    btnCalendar.setDisable(false);
     btnYogaBall.setDisable(false);
 
     btnReturnToFirstRiddle.setDisable(false);
@@ -280,10 +325,10 @@ public class RoomController {
   @FXML
   private void onBoxingBagClicked(ActionEvent event) {
     if (GameState.isRiddleResolved) {
-      counter++;
+      boxingBagCounter++;
       System.out.println("boxing bag clicked");
-      if (counter == 3) {
-        counter = 0;
+      if (boxingBagCounter == 3) {
+        boxingBagCounter = 0;
 
         Button button = (Button) event.getSource();
         Scene sceneButtonIsIn = button.getScene();

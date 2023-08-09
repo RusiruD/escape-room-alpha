@@ -45,6 +45,8 @@ public class SafeController {
     if (s != null && s.equals("76942")) {
       System.out.println("passed");
       GameState.isSafeOpen = true;
+      btnUnlockSafe.setDisable(true);
+      passcode.setDisable(true);
 
       showDialog("Info", "Unlocked!", " The safe is now unlocked");
     } else {

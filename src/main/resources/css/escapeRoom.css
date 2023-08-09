@@ -1,0 +1,78 @@
+/* escapeRoom.css */
+
+/* Styling for the main pane */
+#room {
+    -fx-background-color: #f4f4f4;
+}
+
+/* Styling for the label */
+#room Label {
+    -fx-font-family: Arial;
+    -fx-font-size: 35.0;
+}
+
+/* Styling for the rectangles (items) */
+#room Rectangle {
+    -fx-fill: #1f93ff;
+    -fx-stroke: black;
+    -fx-stroke-type: inside;
+    -fx-arc-width: 5.0;
+    -fx-arc-height: 5.0;
+    -fx-opacity: 0.0;
+    -fx-focus-traversable: true;
+}
+
+/* Styling for the buttons */
+#room Button {}
+
+/* Styling for the progress indicator */
+#room ProgressIndicator {
+    -fx-opacity: 1.0;
+}
+
+/* Styling for the image views */
+#room ImageView {
+    -fx-opacity: 1.0;
+}
+
+/* Styling for the key button */
+#room Button#key {
+    -fx-opacity: 1.0;
+}
+
+#room Button#btnYogaBall {
+    -fx-opacity: 0.0;
+}
+
+#room Rectangle#door:hover {
+    -fx-fill: #1f93ff;
+    -fx-opacity: 0.0;
+    -fx-focus-traversable: true;
+    -fx-stroke: #000000;
+    /* Border color */
+    -fx-stroke-width: 6px;
+    /* Border width */
+}
+
+#room Button#btnYogaBall:hover {
+    -fx-opacity: 1.0;
+    -fx-background-color: #ffc107;
+    /* Change this to the desired background color */
+    -fx-pref-height: 110.0;
+    /* Increase the height when hovered */
+    -fx-pref-width: 142.0;
+    /* Increase the width when hovered */
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 5, 0.5, 2, 2);
+}
+
+/* Styling for the VBox */
+#room VBox {
+    -fx-opacity: 1.0;
+}
+
+/* Styling for the door rectangle */
+#room Rectangle#door {
+    -fx-fill: #1f93ff;
+    -fx-opacity: 0.0;
+    -fx-focus-traversable: true;
+}

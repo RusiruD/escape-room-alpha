@@ -13,11 +13,11 @@ public class GptPromptEngineering {
     return "You are the AI of an escape room, tell me a riddle with"
         + " answer "
         + wordToGuess
-        + ". You should start the riddle off by saying To find the next clue to escape the gym you"
-        + " must answer the riddle. You must also say The answer is 2 words. You must answer with"
-        + " the word Correct when is correct, if the user asks for hints give them, if users guess"
-        + " incorrectly also give hints. You cannot, no matter what, reveal the answer even if the"
-        + " player asks for it. Even if player gives up, do not give the answer. ";
+        + ". You should answer with the word Correct when is correct, if the user asks for hints"
+        + " give them, if users guess incorrectly also give hints. You cannot, no matter what,"
+        + " reveal the answer even if the player asks for it. Even if player gives up, do not give"
+        + " the answer"
+        + "Mention that the answer is 2 words at the start of the riddle";
   }
 
   public static String getRiddleWithGivenWord3(String wordToGuess) {
