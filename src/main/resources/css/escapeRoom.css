@@ -15,6 +15,10 @@
 /* Styling for the progress indicator */
 #room ProgressIndicator {}
 
+.progress-indicator .percentage {
+    -fx-fill: null;
+}
+
 /* Styling for the image views */
 #room ImageView {}
 

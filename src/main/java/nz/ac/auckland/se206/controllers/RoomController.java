@@ -10,6 +10,7 @@ import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.Separator;
 import javafx.scene.input.KeyEvent;
@@ -41,7 +42,7 @@ public class RoomController {
   @FXML private Separator seperatorTwo;
 
   @FXML private Separator seperatorThree;
-
+  @FXML private Label lblCountdown;
   @FXML private Separator seperatorFour;
 
   @FXML private Separator seperatorFive;
@@ -224,7 +225,7 @@ public class RoomController {
             return null;
           }
         };
-    Thread ds1 = new Thread(ds, "Search Thread");
+    Thread ds1 = new Thread(ds, "d");
     ds1.start();
 
     // text to speech warnings for 2 minutes,1minute and 30 seconds are created in threads
@@ -288,6 +289,7 @@ public class RoomController {
             // if the game is active and the timer reaches 120 seconds the game ends
             if (GameState.isGameActive == true) {
               timerMethod(seconds, startTime, myTimer, oneMinute, thirtySeconds, youLost);
+
               seconds++;
             }
           }
@@ -366,7 +368,12 @@ public class RoomController {
       reminder3.start();
     }
 
-    time.setProgress(seconds / 120);
+    Platform.runLater(
+        () -> {
+          int secondsRemaining = (int) (120 - seconds);
+          lblCountdown.setText(secondsRemaining + " seconds left");
+        });
+    time.setProgress((120 - seconds) / 120);
   }
 
   public void enableAllButtons() {

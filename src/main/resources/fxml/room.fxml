@@ -32,7 +32,7 @@
       <Button fx:id="btnStart" layoutX="268.0" layoutY="242.0" mnemonicParsing="false" onAction="#onStartGame" text="Start Game" />
       <Button fx:id="btnYogaBall" disable="true" layoutX="104.0" layoutY="312.0" mnemonicParsing="false" onAction="#onBallClicked" opacity="0.0" prefHeight="105.0" prefWidth="132.0" text="Yoga Ball" />
       <Button fx:id="boxingBag" layoutX="94.0" layoutY="129.0" mnemonicParsing="false" onAction="#onBoxingBagClicked" opacity="0.0" prefHeight="175.0" prefWidth="51.0" text="Boxing Bag" />
-      <ProgressIndicator fx:id="time" layoutX="63.0" layoutY="69.0" prefHeight="52.0" prefWidth="32.0" progress="0.0" />
+      <ProgressIndicator fx:id="time" layoutX="63.0" layoutY="69.0" prefHeight="52.0" prefWidth="32.0" progress="1.0" />
       <Button fx:id="btnReturnToFirstRiddle" layoutX="59.0" layoutY="418.0" mnemonicParsing="false" onAction="#onReturnToFirstRiddle" prefHeight="25.0" prefWidth="71.0" text="1st riddle" />
       <ImageView blendMode="DARKEN" fitHeight="69.0" fitWidth="84.0" layoutX="268.0" layoutY="374.0">
          <image>
@@ -71,5 +71,6 @@
       <Separator fx:id="seperatorFour" layoutX="370.0" layoutY="164.0" orientation="VERTICAL" prefHeight="105.0" prefWidth="16.0" rotate="-129.8" visible="false" />
       <Separator fx:id="seperatorFive" layoutX="300.0" layoutY="212.0" prefHeight="17.0" prefWidth="91.0" rotate="-110.6" visible="false" />
       <Separator fx:id="seperatorSix" layoutX="276.0" layoutY="219.0" prefHeight="17.0" prefWidth="113.0" rotate="135.0" visible="false" />
+      <Label fx:id="lblCountdown" layoutX="90.0" layoutY="72.0" prefHeight="25.0" prefWidth="132.0" text="120 seconds remaining" />
    </children>
 </Pane>
