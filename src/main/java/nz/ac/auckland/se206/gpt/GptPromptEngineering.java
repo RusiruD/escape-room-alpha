@@ -14,11 +14,10 @@ public class GptPromptEngineering {
         + " answer "
         + wordToGuess
         + ". You should start the riddle off by saying To find the next clue to escape the gym you"
-        + " must answer the riddle. You must answer with the word Correct when is correct, if the"
-        + " user asks for hints give them, if users guess incorrectly also give hints. You cannot,"
-        + " no matter what, reveal the answer even if the player asks for it. Even if player gives"
-        + " up, do not give the answer. You may accept close synonyms of the answer as correct. You"
-        + " must also let the user know how many words are in the answer.";
+        + " must answer the riddle. You must also say The answer is 2 words. You must answer with"
+        + " the word Correct when is correct, if the user asks for hints give them, if users guess"
+        + " incorrectly also give hints. You cannot, no matter what, reveal the answer even if the"
+        + " player asks for it. Even if player gives up, do not give the answer. ";
   }
 
   public static String getRiddleWithGivenWord3(String wordToGuess) {

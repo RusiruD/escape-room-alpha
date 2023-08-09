@@ -33,6 +33,7 @@ public class RoomController {
   @FXML private Rectangle weight1;
   @FXML private Rectangle towels;
   @FXML private Rectangle weight2;
+  @FXML private Rectangle door;
   @FXML private ProgressIndicator time;
   @FXML private Button btnReturnToFirstRiddle;
 
@@ -73,6 +74,16 @@ public class RoomController {
     btnReturnToFirstRiddle.setVisible(false);
     // Initialization code goes here
 
+  }
+
+  @FXML
+  private void onDoorClicked() {
+    if (GameState.isKeyFound) {
+      showDialog("Info", "You have escaped", "You have escaped the gym, congratulations!");
+      GameState.isGameWon = true;
+    } else {
+      showDialog("Info", "The door is locked", "You have to find the key to escape");
+    }
   }
 
   @FXML
@@ -140,23 +151,7 @@ public class RoomController {
     alert.showAndWait();
   }
 
-  public void clickWindow(MouseEvent event) throws IOException {
-    if (GameState.isRiddleResolved) {
-      System.out.println("door clicked");
-
-      if (!GameState.isKeyFound) {
-
-        showDialog("Info", "Find the key!", "");
-
-      } else {
-
-        showDialog("Info", "You Won!", "Good Job!");
-
-        btnYogaBall.setDisable(true);
-        btnYogaBall.setVisible(false);
-      }
-    }
-  }
+  public void clickWindow(MouseEvent event) throws IOException {}
 
   /**
    * Handles the click event on the door.
@@ -170,6 +165,9 @@ public class RoomController {
     long startTime = System.currentTimeMillis();
     // the progress indicator is set to 0
     time.setProgress(0);
+
+    time.setVisible(true);
+
     textToSpeech = new TextToSpeech();
     // text to speech warnings for 2 minutes,1minute and 30 seconds are created in threads
     Task<Void> twoMinutes =
@@ -205,6 +203,16 @@ public class RoomController {
             return null;
           }
         };
+    Task<Void> youLost =
+        new Task<Void>() {
+
+          @Override
+          protected Void call() throws Exception {
+
+            textToSpeech.speak("You have lost");
+            return null;
+          }
+        };
 
     // a timer is created that runs a task every second in a background thread
     Timer myTimer = new Timer();
@@ -217,6 +225,10 @@ public class RoomController {
             // if the game is active and the timer reaches 120 seconds the game ends
             if (GameState.isGameActive == true) {
               if (seconds == 120) {
+                if (GameState.isGameWon == false) {
+                  Thread lost = new Thread(youLost, "Search Thread");
+                  lost.start();
+                }
                 Platform.exit();
                 myTimer.cancel();
 

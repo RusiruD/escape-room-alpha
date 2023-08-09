@@ -51,7 +51,7 @@ public class App extends Application {
     SceneManagerAi.addUi(AppUi.SAFE, loadFxml("safe"));
     SceneManagerAi.addUi(AppUi.FOLDER, loadFxml("secondRiddle"));
     SceneManagerAi.addUi(AppUi.PASSCODEHINT, loadFxml("thirdRiddle"));
-    scene = new Scene(SceneManagerAi.getUiRoot(AppUi.ESCAPE_ROOM), 600, 470);
+    scene = new Scene(SceneManagerAi.getUiRoot(AppUi.ESCAPE_ROOM), 750, 500);
 
     stage.setScene(scene);
 

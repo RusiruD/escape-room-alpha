@@ -6,11 +6,18 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
+<?import nz.ac.auckland.se206.ball.BouncingBallPane?>
 
-<Pane fx:id="room" focusTraversable="true" onKeyPressed="#onKeyPressed" onKeyReleased="#onKeyReleased" prefHeight="470.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.RoomController">
+<Pane fx:id="room" centerShape="false" focusTraversable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="487.0" minWidth="745.0" onKeyPressed="#onKeyPressed" onKeyReleased="#onKeyReleased" prefHeight="487.0" prefWidth="745.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.RoomController">
    <children>
+      <ImageView blendMode="DARKEN" fitHeight="378.0" fitWidth="159.0" layoutX="547.0" layoutY="65.0">
+         <image>
+            <Image url="@../images/exit-door-publicdomain.jpg" />
+         </image>
+      </ImageView>
       <ImageView fitHeight="378.0" fitWidth="494.0" layoutX="59.0" layoutY="65.0">
          <image>
             <Image url="@../images/scene.jpg" />
@@ -30,7 +37,7 @@
       <Button fx:id="btnYogaBall" disable="true" layoutX="104.0" layoutY="312.0" mnemonicParsing="false" onAction="#onBallClicked" opacity="0.0" prefHeight="105.0" prefWidth="132.0" text="Yoga Ball" />
       <Button fx:id="boxingBag" layoutX="94.0" layoutY="129.0" mnemonicParsing="false" onAction="#onBoxingBagClicked" opacity="0.0" prefHeight="175.0" prefWidth="51.0" text="Boxing Bag" />
       <ProgressIndicator fx:id="time" layoutX="63.0" layoutY="69.0" prefHeight="52.0" prefWidth="32.0" progress="0.0" />
-      <Button fx:id="btnReturnToFirstRiddle" layoutX="489.0" layoutY="419.0" mnemonicParsing="false" onAction="#onReturnToFirstRiddle" text="1st riddle" />
+      <Button fx:id="btnReturnToFirstRiddle" layoutX="483.0" layoutY="419.0" mnemonicParsing="false" onAction="#onReturnToFirstRiddle" prefHeight="25.0" prefWidth="71.0" text="1st riddle" />
       <ImageView blendMode="DARKEN" fitHeight="78.0" fitWidth="94.0" layoutX="268.0" layoutY="365.0">
          <image>
             <Image url="@../images/icon-seif_generated.jpg" />
@@ -45,5 +52,11 @@
                </image>
             </ImageView>
          </graphic></Button>
+      <VBox layoutX="7.0" layoutY="395.0" prefHeight="69.0" prefWidth="45.0">
+         <children>
+            <BouncingBallPane />
+         </children>
+      </VBox>
+      <Rectangle fx:id="door" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="378.0" layoutX="554.0" layoutY="67.0" onMouseClicked="#onDoorClicked" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="151.0" />
    </children>
 </Pane>
