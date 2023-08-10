@@ -11,7 +11,8 @@ public class SceneManagerAi {
     SAFE,
     FOLDER,
     PASSCODEHINT,
-    CALENDAR
+    CALENDAR,
+    GHOST
   }
 
   private static HashMap<AppUi, Parent> sceneMap = new HashMap<AppUi, Parent>();

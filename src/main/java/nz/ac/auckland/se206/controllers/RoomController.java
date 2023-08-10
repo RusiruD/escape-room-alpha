@@ -44,7 +44,7 @@ public class RoomController {
   @FXML private Separator seperatorThree;
   @FXML private Label lblCountdown;
   @FXML private Separator seperatorFour;
-
+  @FXML private Button ghost;
   @FXML private Separator seperatorFive;
 
   /** Initializes the room view, it is called when the room loads. */
@@ -99,7 +99,8 @@ public class RoomController {
       showDialog("Info", "You have escaped", "You have escaped the gym, congratulations!");
       GameState.isGameWon = true;
     } else {
-      showDialog("Info", "The door is locked", "You have to find the key to escape");
+      showDialog(
+          "Info", "The door is locked", "You have to find the key before time runs out to escape");
     }
   }
 
@@ -273,6 +274,7 @@ public class RoomController {
           public void run() {
             // if the game is active and the timer reaches 120 seconds the game ends
             if (GameState.isGameActive == true) {
+
               timerMethod(seconds, startTime, myTimer, oneMinute, thirtySeconds, youLost);
 
               seconds++;
@@ -321,6 +323,18 @@ public class RoomController {
     }
   }
 
+  @FXML
+  private void onGhostClicked(ActionEvent event) throws IOException {
+    showDialog(
+        "Info",
+        "Ghost",
+        "Be careful talking to the ghost he's been trapped here for years and may decide to lead"
+            + " you astray if you're not careful");
+    Button button = (Button) event.getSource();
+    Scene sceneButtonIsIn = button.getScene();
+    sceneButtonIsIn.setRoot(SceneManagerAi.getUiRoot(AppUi.GHOST));
+  }
+
   public void timerMethod(
       double seconds,
       long startTime,
@@ -334,8 +348,9 @@ public class RoomController {
         Thread lost = new Thread(youLost, "lost Thread");
         lost.start();
       }
-      Platform.exit();
       long time = System.currentTimeMillis() - startTime;
+
+      Platform.exit();
 
       if (GameState.isGameWon == false) {}
 
