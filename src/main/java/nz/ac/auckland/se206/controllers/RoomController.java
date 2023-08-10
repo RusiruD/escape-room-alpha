@@ -213,29 +213,14 @@ public class RoomController {
     time.setProgress(0);
 
     time.setVisible(true);
-    // Platform.runLater(
-    // () -> {
-    Task<Void> ds =
-        new Task<Void>() {
-
-          @Override
-          protected Void call() throws Exception {
-
-            textToSpeech = new TextToSpeech();
-            return null;
-          }
-        };
-    Thread ds1 = new Thread(ds, "d");
-    ds1.start();
-
     // text to speech warnings for 2 minutes,1minute and 30 seconds are created in threads
-    // });
+
     Task<Void> twoMinutes =
         new Task<Void>() {
 
           @Override
           protected Void call() throws Exception {
-
+            textToSpeech = new TextToSpeech();
             textToSpeech.speak("You have 2 minutes remaining", "to escape the gym");
             return null;
           }
@@ -248,7 +233,7 @@ public class RoomController {
 
           @Override
           protected Void call() throws Exception {
-
+            textToSpeech = new TextToSpeech();
             textToSpeech.speak("You have 1 minute remaining", "to escape the gym");
 
             return null;
@@ -260,7 +245,7 @@ public class RoomController {
 
           @Override
           protected Void call() throws Exception {
-
+            textToSpeech = new TextToSpeech();
             textToSpeech.speak("You have 30 seconds remaining to escape", "Tick Tock");
             return null;
           }
@@ -345,11 +330,15 @@ public class RoomController {
       Task<Void> youLost) {
     if (seconds == 120) {
       if (GameState.isGameWon == false) {
+
         Thread lost = new Thread(youLost, "lost Thread");
         lost.start();
       }
       Platform.exit();
       long time = System.currentTimeMillis() - startTime;
+
+      if (GameState.isGameWon == false) {}
+
       myTimer.cancel();
 
       System.out.println(" took " + time + "ms");

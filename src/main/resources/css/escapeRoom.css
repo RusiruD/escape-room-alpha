@@ -30,14 +30,43 @@
 #room Rectangle#door:hover {}
 
 #room Button#btnYogaBall:hover {
-    -fx-opacity: 1.0;
-    -fx-background-color: #ffc107;
+
     /* Change this to the desired background color */
-    -fx-pref-height: 110.0;
+    /* -fx-pref-height: 110.0;
     /* Increase the height when hovered */
-    -fx-pref-width: 142.0;
+    /*-fx-pref-width: 142.0;
     /* Increase the width when hovered */
-    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 5, 0.5, 2, 2);
+    /* -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 5, 0.5, 2, 2);*/
+}
+
+Button:hover {
+    -fx-border-width: 2px;
+    -fx-border-color: blue;
+
+}
+
+
+
+
+
+
+#safe Button#btnGoBack:hover {
+    -fx-border-width: 2px;
+    -fx-border-color: blue;
+    -fx-border-radius: 2px;
+}
+
+.rectangle:hover {
+    -fx-stroke: blue;
+    -fx-stroke-width: 2;
+    -fx-stroke-opacity: 1;
+}
+
+PasswordField:hover {
+    -fx-border-width: 2px;
+    -fx-border-color: blue;
+    -fx-background-color: white;
+    /* Change this to your desired background color */
 }
 
 /* Styling for the VBox */

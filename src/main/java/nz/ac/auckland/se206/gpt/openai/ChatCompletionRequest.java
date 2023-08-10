@@ -177,7 +177,7 @@ public class ChatCompletionRequest {
       }
 
       JsonObject value = jsonOverallBuilder.build();
-      System.out.println("made json and paramters");
+
       // Create and configure the HTTP request
       HttpPost httpPost = new HttpPost(URL_COMPLETION_ENDPOINT);
       httpPost.setHeader("Content-Type", "application/json");

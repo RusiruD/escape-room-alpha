@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import nz.ac.auckland.se206.ball.BouncingBallPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.CalendarController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@../css/escapeRoom.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.CalendarController">
   <children>
       <ImageView blendMode="OVERLAY" fitHeight="387.0" fitWidth="433.0" layoutX="97.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
          <image>

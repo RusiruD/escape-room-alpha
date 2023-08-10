@@ -79,7 +79,7 @@ public class FirstRiddleController {
               return result.getChatMessage();
 
             } catch (ApiProxyException e) {
-              // TODO handle exception appropriately
+
               e.printStackTrace();
               return null;
             }

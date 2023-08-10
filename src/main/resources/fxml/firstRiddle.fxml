@@ -8,12 +8,12 @@
 <?import javafx.scene.layout.VBox?>
 <?import nz.ac.auckland.se206.ball.BouncingBallPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="709.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.ChatController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="709.0" prefWidth="600.0" stylesheets="@../css/escapeRoom.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.ChatController">
   <children>
     <TextArea fx:id="chatTextArea" layoutX="35.0" layoutY="26.0" prefHeight="299.0" prefWidth="538.0" wrapText="true" />
     <TextField fx:id="inputText" layoutX="35.0" layoutY="341.0" prefHeight="26.0" prefWidth="435.0" />
     <Button fx:id="sendButton" layoutX="530.0" layoutY="342.0" mnemonicParsing="false" onAction="#onSendMessage" text="Send" />
-    <Button fx:id="back" layoutX="513.0" layoutY="366.0" mnemonicParsing="false" onAction="#onGoBack" text="Go Back" />
+    <Button fx:id="back" layoutX="513.0" layoutY="381.0" mnemonicParsing="false" onAction="#onGoBack" stylesheets="@../css/escapeRoom.css" text="Go Back" />
       <VBox layoutX="14.0" layoutY="378.0" prefHeight="15.0" prefWidth="78.0">
          <children>
             <BouncingBallPane />

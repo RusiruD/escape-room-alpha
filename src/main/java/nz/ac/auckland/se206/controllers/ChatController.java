@@ -61,17 +61,17 @@ public class ChatController {
   private ChatMessage runGpt(ChatMessage msg) throws ApiProxyException {
 
     chatCompletionRequest.addMessage(msg);
-    System.out.println("added message");
+
     try {
 
       ChatCompletionResult chatCompletionResult = chatCompletionRequest.execute();
-      System.out.println("chat completion result");
+
       Choice result = chatCompletionResult.getChoices().iterator().next();
-      System.out.println("got choices iterator next");
+
       chatCompletionRequest.addMessage(result.getChatMessage());
-      System.out.println("completion request");
+
       appendChatMessage(result.getChatMessage());
-      System.out.println("appended message");
+
       return result.getChatMessage();
 
     } catch (ApiProxyException e) {
@@ -157,6 +157,7 @@ public class ChatController {
               Thread correct = new Thread(rightAnswer, "correct thread");
               // the words "good guess you got it right" are spoken
               correct.start();
+
               GameState.isRiddleResolved = true;
 
             } else {
@@ -187,9 +188,14 @@ public class ChatController {
           "Info",
           "Answer the riddle",
           " You must eventually answer the riddle to proceed with the game");
+    } else {
+      sendButton.setDisable(true);
+      showDialog(
+          "Info",
+          "Congratulations you answered correctly",
+          "You can now proceed with the game, click items in the room to find the next clue to help"
+              + " you escape ");
     }
-    System.out.println(GameState.isRiddleResolved);
-
     Button button = (Button) event.getSource();
     Scene sceneButtonIsIn = button.getScene();
     sceneButtonIsIn.setRoot(SceneManagerAi.getUiRoot(AppUi.ESCAPE_ROOM));

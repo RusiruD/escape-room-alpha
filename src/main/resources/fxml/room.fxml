@@ -53,12 +53,12 @@
             <BouncingBallPane />
          </children>
       </VBox>
-      <Rectangle fx:id="door" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="378.0" layoutX="554.0" layoutY="67.0" onMouseClicked="#onDoorClicked" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="151.0" />
       <ImageView fitHeight="378.0" fitWidth="159.0" layoutX="546.0" layoutY="65.0">
          <image>
             <Image url="@../images/exit-door-publicdomain.jpg" />
          </image>
       </ImageView>
+      <Rectangle fx:id="door" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="378.0" layoutX="554.0" layoutY="67.0" onMouseClicked="#onDoorClicked" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="151.0" />
       <ImageView fitHeight="62.0" fitWidth="83.0" layoutX="438.0" layoutY="68.0">
          <image>
             <Image url="@../images/calendar.png" />
