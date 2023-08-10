@@ -352,8 +352,6 @@ public class RoomController {
 
       Platform.exit();
 
-      if (GameState.isGameWon == false) {}
-
       myTimer.cancel();
 
       System.out.println(" took " + time + "ms");
