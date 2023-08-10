@@ -53,6 +53,7 @@ public class App extends Application {
     SceneManagerAi.addUi(AppUi.FOLDER, loadFxml("secondRiddle"));
     SceneManagerAi.addUi(AppUi.PASSCODEHINT, loadFxml("thirdRiddle"));
     SceneManagerAi.addUi(AppUi.GHOST, loadFxml("ghostAi"));
+    SceneManagerAi.addUi(AppUi.LOSS, loadFxml("lossScreen"));
     scene = new Scene(SceneManagerAi.getUiRoot(AppUi.ESCAPE_ROOM), 750, 500);
 
     stage.setScene(scene);

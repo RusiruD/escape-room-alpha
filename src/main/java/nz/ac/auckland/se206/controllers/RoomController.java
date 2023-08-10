@@ -48,6 +48,7 @@ public class RoomController {
   @FXML private Separator seperatorFive;
 
   /** Initializes the room view, it is called when the room loads. */
+  private static Scene scene;
 
   /**
    * Handles the key pressed event.
@@ -276,6 +277,18 @@ public class RoomController {
             if (GameState.isGameActive == true) {
 
               timerMethod(seconds, startTime, myTimer, oneMinute, thirtySeconds, youLost);
+              if (seconds == 120 && GameState.isGameWon == false) {
+
+                Button button = (Button) event.getSource();
+                Scene sceneButtonIsIn = button.getScene();
+                sceneButtonIsIn.setRoot(SceneManagerAi.getUiRoot(AppUi.LOSS));
+
+              } else if (seconds == 120) {
+                long time = System.currentTimeMillis() - startTime;
+                myTimer.cancel();
+                System.out.println(" took " + time + "ms");
+                Platform.exit();
+              }
 
               seconds++;
             }
@@ -348,13 +361,6 @@ public class RoomController {
         Thread lost = new Thread(youLost, "lost Thread");
         lost.start();
       }
-      long time = System.currentTimeMillis() - startTime;
-
-      Platform.exit();
-
-      myTimer.cancel();
-
-      System.out.println(" took " + time + "ms");
     }
     // if the game is active and the timer reaches 60 seconds a 1 minute text to speech
     // warning is spoken
@@ -381,6 +387,8 @@ public class RoomController {
   public void enableAllButtons() {
     btnGoToSafe.setDisable(false);
     boxingBag.setDisable(false);
+    ghost.setDisable(false);
+    ghost.setVisible(true);
     // boxingBag.setVisible(true);
     btnStart.setDisable(true);
     btnStart.setVisible(false);
