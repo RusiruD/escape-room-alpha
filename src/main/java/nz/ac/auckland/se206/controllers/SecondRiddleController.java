@@ -4,6 +4,7 @@ import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import nz.ac.auckland.se206.controllers.SceneManagerAi.AppUi;
@@ -61,6 +62,14 @@ public class SecondRiddleController {
       e.printStackTrace();
       return null;
     }
+  }
+
+  private void showDialog(String title, String headerText, String message) {
+    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+    alert.setTitle(title);
+    alert.setHeaderText(headerText);
+    alert.setContentText(message);
+    alert.showAndWait();
   }
 
   /**

@@ -38,6 +38,12 @@ public class GptPromptEngineering {
     return "display the number" + wordToGuess + ". dont display any text/words just the number";
   }
 
+  public static String timeReminder(String wordToGuess) {
+    return "make a short(around 8 words) snarky remark about how the user has "
+        + wordToGuess
+        + "seconds left to escape the room.";
+  }
+
   public static String getRiddleWithGivenWord1(String wordToGuess1) {
     return "You are the AI of an escape room, tell me a riddle with"
         + " answer "

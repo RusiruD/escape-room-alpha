@@ -157,6 +157,7 @@ public class ChatController {
               Thread correct = new Thread(rightAnswer, "correct thread");
               // the words "good guess you got it right" are spoken
               correct.start();
+              sendButton.setDisable(true);
 
               GameState.isRiddleResolved = true;
 

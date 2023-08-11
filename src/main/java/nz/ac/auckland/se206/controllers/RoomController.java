@@ -18,6 +18,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Rectangle;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.controllers.SceneManagerAi.AppUi;
+import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 import nz.ac.auckland.se206.speech.TextToSpeech;
 
 /** Controller class for the room view. */
@@ -47,6 +48,7 @@ public class RoomController {
   @FXML private Separator seperatorFour;
   @FXML private Button ghost;
   @FXML private Separator seperatorFive;
+  Timer myTimer = new Timer();
 
   /**
    * Handles the key pressed event.
@@ -89,34 +91,12 @@ public class RoomController {
     System.out.println("weight clicked");
   }
 
-  public void initialize() {
+  public void initialize() throws ApiProxyException {
 
     btnReturnToFirstRiddle.setDisable(true);
     btnReturnToFirstRiddle.setVisible(false);
     // Initialization code goes here
 
-  }
-
-  @FXML
-  private void onDoorClicked() {
-    if (GameState.isRiddleResolved) {
-
-      if (GameState.isKeyFound) {
-        showDialog(
-            "Info",
-            "You have escaped",
-            "You have escaped the gym within 2 minutes, congratulations !");
-        GameState.isGameWon = true;
-
-        Platform.exit();
-
-      } else {
-        showDialog(
-            "Info",
-            "The door is locked",
-            "You have to find the key before time runs out to escape");
-      }
-    }
   }
 
   @FXML
@@ -273,8 +253,6 @@ public class RoomController {
 
     // a timer is created that runs a task every second in a background thread
 
-    Timer myTimer = new Timer();
-
     myTimer.scheduleAtFixedRate(
         new TimerTask() {
           private double seconds = 0;
@@ -388,6 +366,28 @@ public class RoomController {
           lblCountdown.setText(secondsRemaining + " seconds left");
         });
     time.setProgress((120 - seconds) / 120);
+  }
+
+  @FXML
+  private void onDoorClicked() {
+    if (GameState.isRiddleResolved) {
+
+      if (GameState.isKeyFound) {
+        showDialog(
+            "Info",
+            "You have escaped",
+            "You have escaped the gym within 2 minutes, congratulations !");
+        GameState.isGameWon = true;
+        myTimer.cancel();
+        Platform.exit();
+
+      } else {
+        showDialog(
+            "Info",
+            "The door is locked",
+            "You have to find the key before time runs out to escape");
+      }
+    }
   }
 
   public void enableAllButtons() {
