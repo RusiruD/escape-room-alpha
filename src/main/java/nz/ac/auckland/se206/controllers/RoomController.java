@@ -98,17 +98,23 @@ public class RoomController {
 
   @FXML
   private void onDoorClicked() {
-    door.hoverProperty()
-        .addListener(
-            l -> {
-              System.out.println("door is being hovered");
-            });
-    if (GameState.isKeyFound) {
-      showDialog("Info", "You have escaped", "You have escaped the gym, congratulations!");
-      GameState.isGameWon = true;
-    } else {
-      showDialog(
-          "Info", "The door is locked", "You have to find the key before time runs out to escape");
+    if (GameState.isRiddleResolved) {
+
+      if (GameState.isKeyFound) {
+        showDialog(
+            "Info",
+            "You have escaped",
+            "You have escaped the gym within 2 minutes, congratulations !");
+        GameState.isGameWon = true;
+
+        Platform.exit();
+
+      } else {
+        showDialog(
+            "Info",
+            "The door is locked",
+            "You have to find the key before time runs out to escape");
+      }
     }
   }
 
@@ -360,32 +366,18 @@ public class RoomController {
       Task<Void> youLost) {
 
     if (seconds == 120) {
-      if (GameState.isGameWon == false) {
 
-        Thread lost = new Thread(youLost, "lost Thread");
-        lost.start();
-        long time = System.currentTimeMillis() - startTime;
-        myTimer.cancel();
-        System.out.println(" took " + time + "ms");
-        // Platform.exit();
-        Platform.runLater(
-            () -> {
-              showDialog("Info", "Lost", "You didnt escape the room within 2 minutes so you lost");
-              Platform.exit();
-
-              /*  FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/lossScreen.fxml"));
-                Parent root = loader.load();
-
-                Scene newScene = new Scene(root);
-
-                Stage stage = new Stage(); // Create a new stage for the new scene
-                stage.setScene(newScene);
-                stage.show();
-              } catch (IOException e) {
-                e.printStackTrace();*/
-
-            });
-      }
+      Thread lost = new Thread(youLost, "lost Thread");
+      lost.start();
+      long time = System.currentTimeMillis() - startTime;
+      myTimer.cancel();
+      System.out.println(" took " + time + "ms");
+      // Platform.exit();
+      Platform.runLater(
+          () -> {
+            showDialog("Info", "Lost", "You didnt escape the room within 2 minutes so you lost");
+            Platform.exit();
+          });
     }
     // if the game is active and the timer reaches 60 seconds a 1 minute text to speech
     // warning is spoken
