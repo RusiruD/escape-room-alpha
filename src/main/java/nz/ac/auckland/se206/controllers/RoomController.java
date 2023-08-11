@@ -16,12 +16,14 @@ import javafx.scene.control.Separator;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.Stage;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.controllers.SceneManagerAi.AppUi;
 import nz.ac.auckland.se206.speech.TextToSpeech;
 
 /** Controller class for the room view. */
 public class RoomController {
+  private Stage firsStage;
   private TextToSpeech textToSpeech;
   @FXML private Button btnStart;
   @FXML private Button btnGoToSafe;
@@ -46,6 +48,7 @@ public class RoomController {
   @FXML private Separator seperatorFour;
   @FXML private Button ghost;
   @FXML private Separator seperatorFive;
+  private Stage stage1;
 
   /** Initializes the room view, it is called when the room loads. */
   private static Scene scene;
@@ -74,6 +77,10 @@ public class RoomController {
   @FXML
   private void onTowelsClicked(MouseEvent event) {
     System.out.println("Towels clicked");
+  }
+
+  public void setStage(Stage stage) {
+    this.firsStage = stage;
   }
 
   @FXML
@@ -107,15 +114,17 @@ public class RoomController {
 
   @FXML
   private void onWindowClicked() throws IOException {
-    System.out.println("window clicked");
-    windowCounter++;
-    if (windowCounter == 3) {
-      seperatorThree.setVisible(true);
-      seperatorTwo.setVisible(true);
-      seperatorOne.setVisible(true);
-    } else if (windowCounter > 3) {
-      seperatorFive.setVisible(true);
-      seperatorFour.setVisible(true);
+    if (GameState.isRiddleResolved) {
+      System.out.println("window clicked");
+      windowCounter++;
+      if (windowCounter == 3) {
+        seperatorThree.setVisible(true);
+        seperatorTwo.setVisible(true);
+        seperatorOne.setVisible(true);
+      } else if (windowCounter > 3) {
+        seperatorFive.setVisible(true);
+        seperatorFour.setVisible(true);
+      }
     }
   }
 
@@ -167,10 +176,12 @@ public class RoomController {
 
   @FXML
   private void onCalendarClicked(ActionEvent event) throws IOException {
-    System.out.println("Calendar clicked");
-    Button button = (Button) event.getSource();
-    Scene sceneButtonIsIn = button.getScene();
-    sceneButtonIsIn.setRoot(SceneManagerAi.getUiRoot(AppUi.CALENDAR));
+    if (GameState.isRiddleResolved) {
+      System.out.println("Calendar clicked");
+      Button button = (Button) event.getSource();
+      Scene sceneButtonIsIn = button.getScene();
+      sceneButtonIsIn.setRoot(SceneManagerAi.getUiRoot(AppUi.CALENDAR));
+    }
   }
 
   /**
@@ -276,19 +287,9 @@ public class RoomController {
             // if the game is active and the timer reaches 120 seconds the game ends
             if (GameState.isGameActive == true) {
 
+              if (seconds == 120) {}
+
               timerMethod(seconds, startTime, myTimer, oneMinute, thirtySeconds, youLost);
-              if (seconds == 120 && GameState.isGameWon == false) {
-
-                Button button = (Button) event.getSource();
-                Scene sceneButtonIsIn = button.getScene();
-                sceneButtonIsIn.setRoot(SceneManagerAi.getUiRoot(AppUi.LOSS));
-
-              } else if (seconds == 120) {
-                long time = System.currentTimeMillis() - startTime;
-                myTimer.cancel();
-                System.out.println(" took " + time + "ms");
-                Platform.exit();
-              }
 
               seconds++;
             }
@@ -338,14 +339,16 @@ public class RoomController {
 
   @FXML
   private void onGhostClicked(ActionEvent event) throws IOException {
-    showDialog(
-        "Info",
-        "Ghost",
-        "Be careful talking to the ghost he's been trapped here for years and may decide to lead"
-            + " you astray if you're not careful");
-    Button button = (Button) event.getSource();
-    Scene sceneButtonIsIn = button.getScene();
-    sceneButtonIsIn.setRoot(SceneManagerAi.getUiRoot(AppUi.GHOST));
+    if (GameState.isRiddleResolved) {
+      showDialog(
+          "Info",
+          "Ghost",
+          "Be careful talking to the ghost he's been trapped here for years and may decide to lead"
+              + " you astray if you're not careful");
+      Button button = (Button) event.getSource();
+      Scene sceneButtonIsIn = button.getScene();
+      sceneButtonIsIn.setRoot(SceneManagerAi.getUiRoot(AppUi.GHOST));
+    }
   }
 
   public void timerMethod(
@@ -355,11 +358,33 @@ public class RoomController {
       Task<Void> oneMinute,
       Task<Void> thirtySeconds,
       Task<Void> youLost) {
+
     if (seconds == 120) {
       if (GameState.isGameWon == false) {
 
         Thread lost = new Thread(youLost, "lost Thread");
         lost.start();
+        long time = System.currentTimeMillis() - startTime;
+        myTimer.cancel();
+        System.out.println(" took " + time + "ms");
+        // Platform.exit();
+        Platform.runLater(
+            () -> {
+              showDialog("Info", "Lost", "You didnt escape the room within 2 minutes so you lost");
+              Platform.exit();
+
+              /*  FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/lossScreen.fxml"));
+                Parent root = loader.load();
+
+                Scene newScene = new Scene(root);
+
+                Stage stage = new Stage(); // Create a new stage for the new scene
+                stage.setScene(newScene);
+                stage.show();
+              } catch (IOException e) {
+                e.printStackTrace();*/
+
+            });
       }
     }
     // if the game is active and the timer reaches 60 seconds a 1 minute text to speech
