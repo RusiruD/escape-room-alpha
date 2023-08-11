@@ -16,14 +16,13 @@ import javafx.scene.control.Separator;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Rectangle;
-import javafx.stage.Stage;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.controllers.SceneManagerAi.AppUi;
 import nz.ac.auckland.se206.speech.TextToSpeech;
 
 /** Controller class for the room view. */
 public class RoomController {
-  private Stage firsStage;
+
   private TextToSpeech textToSpeech;
   @FXML private Button btnStart;
   @FXML private Button btnGoToSafe;
@@ -48,10 +47,6 @@ public class RoomController {
   @FXML private Separator seperatorFour;
   @FXML private Button ghost;
   @FXML private Separator seperatorFive;
-  private Stage stage1;
-
-  /** Initializes the room view, it is called when the room loads. */
-  private static Scene scene;
 
   /**
    * Handles the key pressed event.
@@ -79,13 +74,19 @@ public class RoomController {
     System.out.println("Towels clicked");
   }
 
-  public void setStage(Stage stage) {
-    this.firsStage = stage;
-  }
-
   @FXML
   private void clickBottle(MouseEvent event) {
     System.out.println("Bottle  clicked");
+  }
+
+  @FXML
+  private void clickWeight(MouseEvent event) {
+    System.out.println("weight clicked");
+  }
+
+  @FXML
+  public void clickWeight1(MouseEvent event) {
+    System.out.println("weight clicked");
   }
 
   public void initialize() {
@@ -156,16 +157,6 @@ public class RoomController {
                 System.out.println("Button is being hovered");
               });
     }
-  }
-
-  @FXML
-  private void clickWeight(MouseEvent event) {
-    System.out.println("weight clicked");
-  }
-
-  @FXML
-  public void clickWeight1(MouseEvent event) {
-    System.out.println("weight clicked");
   }
 
   @FXML
@@ -292,8 +283,6 @@ public class RoomController {
           public void run() {
             // if the game is active and the timer reaches 120 seconds the game ends
             if (GameState.isGameActive == true) {
-
-              if (seconds == 120) {}
 
               timerMethod(seconds, startTime, myTimer, oneMinute, thirtySeconds, youLost);
 
